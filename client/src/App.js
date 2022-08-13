@@ -20,8 +20,8 @@ function App() {
           <Route path={'/register'} element={<UserRegistration/>} />
           <Route path={'/about'} element={<About/>} />
           <Route path={'/dashboard'} element={<GoalDashboard/>} />
-          <Route path={'/goal/add'} element={<GoalAdd/>} />
-          <Route path={'/goal/edit'} element={<GoalUpdate/>} />
+          <Route path={'/goal/add/:category'} element={<GoalAdd/>} />
+          <Route path={'/goal/edit/:category/:id'} element={<GoalUpdate/>} />
         </Routes>
       </BrowserRouter>
     </div>
