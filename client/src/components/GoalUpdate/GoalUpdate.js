@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import GoalList from '../GoalList/GoalList';
+import GoalForm from '../GoalForm/GoalForm';
 
 
 const GoalUpdate = (props) => {
@@ -19,7 +19,7 @@ const GoalUpdate = (props) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // axios.get(`http://localhost:5000/api/posts/${id}`)
+    // axios.get(`http://localhost:5000/api/posts/${id}`) //TODO confirm axios path and add authorization
     // .then( res => {
     //   setGoal(res.data)
       setLoaded(true)
@@ -28,7 +28,7 @@ const GoalUpdate = (props) => {
   }, [])
 
   const postSubmit = (successResponse) => {
-    axios.put(`http://localhost:5000/api/${category}`, {...goal, createdBy: userId})
+    axios.put(`http://localhost:5000/api/${category}`, {...goal, createdBy: userId}) //TODO confirm axios path and add authorization
     .then(res => navigate('/dashboard'))
     .catch(err => {
       setError(err.response.data)
@@ -39,7 +39,7 @@ const GoalUpdate = (props) => {
   return (
     <>
     { loaded &&
-      <GoalList action={"Update"} category={"nutrition"} userId={userId} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error} />
+      <GoalForm action={"Update"} category={"nutrition"} userId={userId} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error} />
     }
     </>
   )

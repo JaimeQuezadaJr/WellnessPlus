@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import GoalList from '../GoalList/GoalList';
+import GoalForm from '../GoalForm/GoalForm';
 
 
 const GoalAdd = (props) => {
@@ -17,8 +17,8 @@ const GoalAdd = (props) => {
   });
   const [error, setError] = useState({});
 
-  const postSubmit = (successResponse) => {
-    axios.post(`http://localhost:5000/api/${category}`, {...goal, createdBy: userId})
+  const postSubmit = () => {
+    axios.post(`http://localhost:5000/api/${category}`, {...goal, createdBy: userId}) //TODO confirm axios path and add authorization
     .then(res => navigate('/dashboard'))
     .catch(err => {
       setError(err.response.data)
@@ -27,7 +27,7 @@ const GoalAdd = (props) => {
   }
 
   return (
-    <GoalList action={"Add"} category={"nutrition"} userId={userId} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error} />
+    <GoalForm action={"Add"} category={"nutrition"} userId={userId} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error} />
   )
 }
 export default GoalAdd
