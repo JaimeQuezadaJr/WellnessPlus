@@ -1,0 +1,20 @@
+.goalContainer {
+  border: 2px solid #010101;
+  border-radius: 1rem;
+}
+
+.goalDates {
+  color: #808080;
+  font-size: 0.8rem;
+}
+
+.goalComplete{
+  text-decoration: line-through;
+  color: #808080;
+  ;
+}
+
+.goalNotComplete{
+  text-decoration: none;
+  color: inherit;
+}
