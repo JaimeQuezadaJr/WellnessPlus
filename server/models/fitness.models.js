@@ -16,7 +16,8 @@ const FitnessSchema = mongoose.Schema(
         },
         completedBy: {
             type: Date,
-            required: [true, 'Please add goal completion date']
+            required: [true, 'Please add goal completion date'],
+            min: Date.now
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
