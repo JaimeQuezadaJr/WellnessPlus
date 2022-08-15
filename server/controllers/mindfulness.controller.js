@@ -23,8 +23,8 @@ module.exports.findOneMindfulness = (req, res) => {
 }
 
 module.exports.findMindfulnessByUser = (req, res) => {
-  // User.findOne({ username: req.params.username }).then((user) => {   //TODO decide whether to keep it until complete front end useState/localstorage
-  //   console.log('USERID', user._id);
+  User.findOne({ username: req.params.username }).then((user) => {   //TODO decide whether to keep it until complete front end useState/localstorage
+    console.log('USERID', user._id);
     Mindfulness.find({ createdBy: user._id }) //TODO may need to change find parameter (user._id)
       .populate('createdBy', 'username email')
       .then((Mindfulness) => {
@@ -36,6 +36,7 @@ module.exports.findMindfulnessByUser = (req, res) => {
       .catch((err) => {
         res.status(400).json({ message: 'something went wrong in find all Mindfulness', error: err });
       });
+})
 }
 
 module.exports.createNewMindfulness = (req, res) => {
