@@ -42,7 +42,8 @@ module.exports.findFitnessByUser = (req, res) => {
 }
 
 module.exports.createNewFitness = (req, res) => {
-    Fitness.create(req.body)
+    const user = jwt.verify(req.cookies.userToken, SECRET);
+    Fitness.create({ ...req.body, createdBy: user._id })
         .then((newFitness) => {
             res.status(201).json(newFitness)
         })

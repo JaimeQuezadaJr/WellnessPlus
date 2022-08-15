@@ -42,7 +42,8 @@ module.exports.findMindfulnessByUser = (req, res) => {
 }
 
 module.exports.createNewMindfulness = (req, res) => {
-    Mindfulness.create(req.body)
+    const user = jwt.verify(req.cookies.userToken, SECRET);
+    Mindfulness.create({ ...req.body, createdBy: user._id })
         .then((newMindfulness) => {
             res.status(201).json(newMindfulness)
         })
