@@ -1,4 +1,6 @@
 const Fitness = require('../models/fitness.model');
+const jwt = require('jsonwebtoken');
+const SECRET = process.env.JWT_SECRET;
 const User = require('../models/user.model');
 
 
