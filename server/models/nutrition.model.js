@@ -1,9 +1,4 @@
-//description
-//completed at
-//  createdBy: {
-//   type: mongoose.Schema.Types.ObjectId,
-//   ref: 'User'
-// }
+
 const mongoose = require('mongoose');
 
 const NutritionSchema = mongoose.Schema(
