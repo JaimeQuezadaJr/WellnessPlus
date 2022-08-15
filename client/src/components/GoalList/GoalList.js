@@ -27,8 +27,38 @@ const GoalList = ({goals}) => {
   //TODO change edit & add button navigate
 
   return (
-    <div>
-      <Row className={`${styles.goalContainer} p-5 m-5`}>
+    <div className={`${styles.goalContainer} p-5 m-5`}>
+      { goals.map( (goal, index) =>
+        <Row key={index}>
+          <Col md={8}>
+            <p className={complete? styles.goalComplete: styles.goalNotComplete}>goal example {goal}</p>
+            <Row as={'dl'} className={'g-5'}>
+              <Col>
+                <Row>
+                  <Col as={'dt'} className={styles.goalDates}>Made on</Col>
+                  <Col as={'dd'} className={styles.goalDates}>12/11/2021</Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row>
+                <Col as={'dt'} className={styles.goalDates}>Complete by</Col>
+                  <Col as={'dd'} className={styles.goalDates}>12/31/2021</Col>
+                </Row>
+              </Col>
+            </Row>
+          </Col>
+          <Col md={2} className="d-grid pb-5">
+            { complete
+              ? <Button onClick={ onCompleteHandler } variant={'secondary'}>Completed</Button>
+              : <Button onClick={ onCompleteHandler } variant={'primary'}>Complete</Button>
+            }
+          </Col>
+          <Col md={2} className="d-grid pb-5">
+            <Button onClick={() => navigate('/goal/edit/nutrition/1')}>Edit</Button>
+          </Col>
+        </Row>
+      )}
+      <Row>
         <Col md={8}>
           <p className={complete? styles.goalComplete: styles.goalNotComplete}>goal example</p>
           <Row as={'dl'} className={'g-5'}>
