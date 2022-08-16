@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const SECRET = process.env.JWT_SECRET;
 console.log('SECRET', SECRET);
 
-module.exports.register = (req, res) => {
+module.exports.register = async (req, res) => {
     try {
         const user = new User(req.body);
         const newUser = await user.save();
@@ -24,7 +24,7 @@ module.exports.register = (req, res) => {
     }
 }
 
-module.exports.login = (req, res) => {
+module.exports.login = async (req, res) => {
     const userDocument = await User.findOne({ email: req.body.email });
     console.log('USERDOC', userDocument);
     if (!userDocument) {
@@ -57,7 +57,7 @@ module.exports.logout = (req, res) => {
     res.json({ successMessage: 'User logged out' });
 }
 
-module.exports.getLoggedInUser = (req, res) => {
+module.exports.getLoggedInUser = async (req, res) => {
     const user = jwt.verify(req.cookies.userToken, SECRET);
     User.findOne({ _id: user._id })
         .then((user) => {
