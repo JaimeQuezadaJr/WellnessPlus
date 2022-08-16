@@ -13,6 +13,10 @@ const NutritionSchema = mongoose.Schema(
             required: [true, 'Please add goal completion date'],
             min: Date.now
         },
+        complete: {
+          type: Boolean,
+          default: false
+        },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
