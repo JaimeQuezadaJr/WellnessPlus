@@ -41,13 +41,13 @@ const GoalDashboard = (props) => {
         </ButtonGroup>
       </div>
       { category === "nutrition" &&
-          <GoalList goals={nutrition}/>
+          <GoalList goals={nutrition} category={'nutrition'}/>
       }
       { category === "fitness" &&
-          <GoalList goals={fitness}/>
+          <GoalList goals={fitness} category={'fitness'}/>
       }
       { category === "mindfulness" &&
-          <GoalList goals={mindfulness}/>
+          <GoalList goals={mindfulness} category={'mindfulness'}/>
       }
     </div>
   )
