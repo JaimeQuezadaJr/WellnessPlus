@@ -12,6 +12,23 @@ const UserRegistration = ({ setIsLoggedin }) => {
     password: '',
     confirmPassword: '',
   });
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post('http://localhost:8000/register', user, { withCredentials: true })
+      .then((res) => {
+        console.log(res.data);
+        setIsLoggedin(true);
+        navigate('/');
+      })
+      .catch((err) => console.log(err));
+  };
   
   return (
     <div>UserRegistration</div>
