@@ -7,18 +7,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from "./GoalList.module.css";
 
-const GoalList = ({goals}) => {
+const GoalList = ({goals, category}) => {
 
   const navigate = useNavigate();
   const [complete, setComplete] = useState(false);
 
-  const onCompleteHandler = (e) => {
+  const onCompleteHandler = (e, goalId) => {
     //TODO set put request and move setComplete to then in response
     console.log(e);
-    setComplete(!complete);
-    // axios.put('http://localhost:5000/api/')
+    // axios.put(`http://localhost:5000/${category}/${goalId}`, {"complete": !complete})
     //   .then(res => {
-    //     console.log(res);
+          // console.log(res);
+          setComplete(!complete);
     //   })
     //   .catch(err => console.log(err));
   }
@@ -49,8 +49,8 @@ const GoalList = ({goals}) => {
           </Col>
           <Col md={2} className="d-grid pb-5">
             { complete
-              ? <Button onClick={ onCompleteHandler } variant={'secondary'}>Completed</Button>
-              : <Button onClick={ onCompleteHandler } variant={'primary'}>Complete</Button>
+              ? <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'secondary'}>Completed</Button>
+              : <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'primary'}>Complete</Button>
             }
           </Col>
           <Col md={2} className="d-grid pb-5">
