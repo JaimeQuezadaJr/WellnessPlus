@@ -15,7 +15,7 @@ const GoalDashboard = (props) => {
   
   // useEffect(() =>{
       //TODO get all three goals from backend
-  //   axios.get(`http://localhost:5000/api/goals/nutrition/${}id`)
+  //   axios.get(`http://localhost:5000/api/goals/nutrition/${id}`)
   //     .then(res => console.log(res))
   //     .catch(err => console.log(err));
   // },[])
@@ -23,7 +23,7 @@ const GoalDashboard = (props) => {
   //TODO onClick: setCategory, axios-Category
   const categoryHandler = (e) => {
     setCategory(e.target.value);
-    // axios.get(`http://localhost:5000/api/${e.target.value}`)
+    // axios.get(`http://localhost:5000/api/${e.target.value}/${id}`)
     //   .then(res => console.log(res))
     //   .catch(err => console.log(err));
   }
@@ -41,13 +41,13 @@ const GoalDashboard = (props) => {
         </ButtonGroup>
       </div>
       { category === "nutrition" &&
-          <GoalList goals={nutrition}/>
+          <GoalList goals={nutrition} category={'nutrition'}/>
       }
       { category === "fitness" &&
-          <GoalList goals={fitness}/>
+          <GoalList goals={fitness} category={'fitness'}/>
       }
       { category === "mindfulness" &&
-          <GoalList goals={mindfulness}/>
+          <GoalList goals={mindfulness} category={'mindfulness'}/>
       }
     </div>
   )
