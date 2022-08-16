@@ -42,7 +42,7 @@ module.exports.findNutritionByUser = (req, res) => {
 }
 
 module.exports.createNewNutrition = (req, res) => {
-    const user = jwt.verify(req.cookies.userToken, SECRET);
+    // const user = jwt.verify(req.cookies.userToken, SECRET);
     Nutrition.create({ ...req.body, createdBy: user._id })
         .then((newNutrition) => {
             res.status(201).json(newNutrition)
