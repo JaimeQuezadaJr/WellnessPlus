@@ -25,25 +25,23 @@ module.exports.findOneNutrition = (req, res) => {
 }
 
 module.exports.findNutritionByUser = (req, res) => {
-  User.findOne({ username: req.params.username }).then((user) => {   //TODO decide whether to keep it until complete front end useState/localstorage
-    console.log('USERID', user._id);
-    Nutrition.find({ createdBy: user._id }) //TODO may need to change find parameter (user._id)
-      .populate('createdBy', 'username email')
+  // User.findOne({ username: req.params.username }).then((user) => {   //TODO decide whether to keep it until complete front end useState/localstorage
+  //   console.log('USERID', user._id);
+    Nutrition.find({ createdBy: req.params.userId }) //TODO may need to change find parameter (user._id)
+      .populate('createdBy', '_id email')
       .then((nutrition) => {
         res.json(nutrition);
       })
       .catch((err) => {
         res.status(400).json({ message: 'something went wrong in find all nutrition', error: err });
       })
-      .catch((err) => {
-        res.status(400).json({ message: 'something went wrong in find all nutrition', error: err });
-      });
-})
 }
 
-module.exports.createNewNutrition = (req, res) => {
+module.exports.createNutrition = (req, res) => {
+    //TODO may needed when implementing JWT
     // const user = jwt.verify(req.cookies.userToken, SECRET);
-    Nutrition.create({ ...req.body, createdBy: user._id })
+    // Nutrition.create({ ...req.body, createdBy: user._id })
+    Nutrition.create(req.body)
         .then((newNutrition) => {
             res.status(201).json(newNutrition)
         })
