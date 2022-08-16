@@ -31,8 +31,28 @@ const UserRegistration = ({ setIsLoggedin }) => {
   };
   
   return (
-    <div>UserRegistration</div>
-  )
-}
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="firstName">First Name:</label>
+      <input type="text" name="firstName" value={user.firstName} onChange={handleChange} required />
+      <label htmlFor="lastName">Last Name:</label>
+      <input type="text" name="lastName" value={userlasttName} onChange={handleChange} required />
+      <label htmlFor="age">Age:</label>
+      <input type="number" name="age" value={user.age} onChange={handleChange} required />
+      <label htmlFor="email">Email:</label>
+      <input type="email" name="email" value={user.email} onChange={handleChange} required />
+      <label htmlFor="password">Password:</label>
+      <input type="text" name="password" value={user.password} onChange={handleChange} required />
+      <label htmlFor="confirmPassword">Confirm Password:</label>
+      <input
+        type="text"
+        name="confirmPassword"
+        value={user.confirmPassword}
+        onChange={handleChange}
+        required
+      />
+      <button>Register</button>
+    </form>
+  );
+};
 
 export default UserRegistration;
