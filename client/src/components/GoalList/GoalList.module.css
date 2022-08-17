@@ -9,12 +9,14 @@
 }
 
 .goalComplete{
+  font-size: 1.2rem;
   text-decoration: line-through;
   color: #808080;
   ;
 }
 
 .goalNotComplete{
+  font-size: 1.2rem;
   text-decoration: none;
   color: inherit;
 }
