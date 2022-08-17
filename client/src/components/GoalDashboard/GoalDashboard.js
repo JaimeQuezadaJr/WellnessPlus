@@ -7,18 +7,19 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
 const GoalDashboard = (props) => {
 
+  const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
 
   const [nutrition, setNutrition] = useState(['nutrition']);
   const [fitness, setFitness] = useState(['fitness']);
   const [mindfulness, setMindfulness] = useState(['mindfulness']);
   const [category, setCategory] = useState("nutrition");
   
-  // useEffect(() =>{
+  useEffect(() =>{
       //TODO get all three goals from backend
-  //   axios.get(`http://localhost:5000/api/goals/nutrition/${id}`)
-  //     .then(res => console.log(res))
-  //     .catch(err => console.log(err));
-  // },[])
+    axios.get(`http://localhost:5000/api/nutrition/user/${userId}`)
+      .then(res => setNutrition(res.data))
+      .catch(err => console.log(err));
+  },[userId])
 
   //TODO onClick: setCategory, axios-Category
   const categoryHandler = (e) => {
