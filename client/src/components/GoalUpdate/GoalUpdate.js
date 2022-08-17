@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import GoalForm from '../GoalForm/GoalForm';
 
 
-const GoalUpdate = (props) => {
+const GoalUpdate = ({userId}) => {
 
   const {category, id} = useParams();
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const GoalUpdate = (props) => {
   });
   const [error, setError] = useState({});
   const [loaded, setLoaded] = useState(false);
-  const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
+  // const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
 
   useEffect(() => {
     axios.get(`http://localhost:8000/api/${category}/${id}`) //TODO confirm axios path and add authorization

@@ -5,9 +5,9 @@ import GoalList from "../GoalList/GoalList";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
-const GoalDashboard = (props) => {
+const GoalDashboard = ({userId}) => {
 
-  const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
+  // const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
 
   const [goals, setGoals] = useState([]);
   const [category, setCategory] = useState("nutrition");

@@ -5,12 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import GoalForm from '../GoalForm/GoalForm';
 
 
-const GoalAdd = (props) => {
+const GoalAdd = ({userId}) => {
 
   const {category} = useParams();
   const navigate = useNavigate();
 
-  const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
+  // const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
 
   const defaultCompletedBy = () => {
     let today = new Date();
