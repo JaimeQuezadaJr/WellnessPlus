@@ -7,10 +7,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from "./GoalList.module.css";
 
-const GoalList = ({goals, category}) => {
+const GoalList = ({goals, category, complete, setComplete}) => {
 
   const navigate = useNavigate();
-  const [complete, setComplete] = useState({});
 
   const dateParse = (date) => {
     let dateObj = new Date(date);
@@ -18,12 +17,6 @@ const GoalList = ({goals, category}) => {
     let month = `0${dateObj.getMonth() + 1}`.slice(-2);
     return `${month}/${day}/${dateObj.getFullYear()}`;
   }
-
-  useEffect( () => {
-    let temp = {};
-    goals.map((goal) => temp[goal._id] = goal.complete);
-    setComplete(temp);
-  }, [goals])
 
   const onCompleteHandler = (e, goalId) => {
     //TODO set put request and move setComplete to then in response
