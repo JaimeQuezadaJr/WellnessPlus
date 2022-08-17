@@ -14,8 +14,10 @@ app.use(cors({ origin: 'http://localhost:3000'}));
 
 const userRoutes = require('./routes/user.routes');
 userRoutes(app);
+
+//.. routes for goals
 require('./routes/nutrition.routes')(app);
-// require('./routes/mindfulness.routes')(app);
-// require('./routes/fitness.routes')(app);
+require('./routes/mindfulness.routes')(app);
+require('./routes/fitness.routes')(app);
 
 app.listen(port, () => console.log(`Listening on port: ${port}`));
