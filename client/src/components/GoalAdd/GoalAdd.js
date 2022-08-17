@@ -27,7 +27,7 @@ const GoalAdd = (props) => {
 
 
   const postSubmit = () => {
-    axios.post(`http://localhost:5000/api/${category}`, {...goal, createdBy: userId}) //TODO confirm axios path and add authorization
+    axios.post(`http://localhost:8000/api/${category}`, {...goal, createdBy: userId}) //TODO confirm axios path and add authorization
     .then(res => navigate('/dashboard'))
     .catch(err => {
       setError(err.response.data.error.errors);

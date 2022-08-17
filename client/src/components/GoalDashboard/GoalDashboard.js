@@ -15,7 +15,7 @@ const GoalDashboard = (props) => {
 
   useEffect(() =>{
     //TODO get all three goals from backend
-    axios.get(`http://localhost:5000/api/${category}/user/${userId}`)
+    axios.get(`http://localhost:8000/api/${category}/user/${userId}`)
       .then(res => {
         setGoals(res.data)
 
