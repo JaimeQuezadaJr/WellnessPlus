@@ -8,26 +8,35 @@ import GoalForm from '../GoalForm/GoalForm';
 const GoalAdd = (props) => {
 
   const {category} = useParams();
-  const {userId} = props;
   const navigate = useNavigate();
+
+  const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
+
+  const defaultCompletedBy = () => {
+    let today = new Date();
+    let tomorrow = new Date();
+    return tomorrow.setDate(today.getDate() + 1);
+  }
 
   const [goal, setGoal] = useState({
     "description": "",
-    "completeBy": "",
+    "completedBy": defaultCompletedBy(),
   });
   const [error, setError] = useState({});
+
+
 
   const postSubmit = () => {
     axios.post(`http://localhost:5000/api/${category}`, {...goal, createdBy: userId}) //TODO confirm axios path and add authorization
     .then(res => navigate('/dashboard'))
     .catch(err => {
-      setError(err.response.data)
-      console.log(err)
+      setError(err.response.data.error.errors);
+      console.log(err);
     })
   }
 
   return (
-    <GoalForm action={"Add"} category={"nutrition"} userId={userId} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error} />
+    <GoalForm action={"Add"} category={category} userId={userId} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error}/>
   )
 }
 export default GoalAdd
