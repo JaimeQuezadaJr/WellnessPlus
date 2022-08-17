@@ -14,18 +14,19 @@ import { useState } from 'react';
 function App() {
   
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState("");
   
   return (
     <div>
       <BrowserRouter>
-        <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
+        <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} setUserId={setUserId}/>
         <Routes>
-          <Route path={'/'} element={<UserLogin setLoggedIn={setLoggedIn}/>} />
-          <Route path={'/register'} element={<UserRegistration setLoggedIn={setLoggedIn}/>}/>
+          <Route path={'/'} element={<UserLogin setLoggedIn={setLoggedIn} setUserId={setUserId}/>} />
+          <Route path={'/register'} element={<UserRegistration setLoggedIn={setLoggedIn} setUserId={setUserId}/>}/>
           <Route path={'/about'} element={<About/>} />
-          <Route path={'/dashboard'} element={<GoalDashboard/>} />
-          <Route path={'/goal/add/:category'} element={<GoalAdd/>} />
-          <Route path={'/goal/edit/:category/:id'} element={<GoalUpdate/>} />
+          <Route path={'/dashboard'} element={<GoalDashboard userId={userId} />} />
+          <Route path={'/goal/add/:category'} element={<GoalAdd userId={userId} />} />
+          <Route path={'/goal/edit/:category/:id'} element={<GoalUpdate userId={userId} />} />
         </Routes>
       </BrowserRouter>
     </div>

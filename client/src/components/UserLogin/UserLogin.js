@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const UserLogin = ({ setLoggedIn }) => {
+const UserLogin = ({ setLoggedIn, setUserId }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: '',
@@ -18,7 +18,7 @@ const UserLogin = ({ setLoggedIn }) => {
     axios
       .post('http://localhost:8000/login', user, { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setLoggedIn(true);
         navigate('/dashboard');
       })

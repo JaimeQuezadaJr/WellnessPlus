@@ -28,7 +28,7 @@ module.exports.findNutritionByUser = (req, res) => {
   // User.findOne({ username: req.params.username }).then((user) => {   //TODO decide whether to keep it until complete front end useState/localstorage
   //   console.log('USERID', user._id);
     Nutrition.find({ createdBy: req.params.userId }) //TODO may need to change find parameter (user._id)
-      .populate('createdBy', '_id email')
+      // .populate('createdBy', '_id email')
       .then((nutrition) => {
         res.json(nutrition);
       })
