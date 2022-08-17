@@ -4,7 +4,7 @@ const FitnessController = require('../controllers/fitness.controller');
 module.exports = (app) => { //app = express()
   app.get('/api/fitness', FitnessController.findAllFitnessGoals);
   app.get('/api/fitness/user/:userId', FitnessController.findFitnessByUser);
-  app.get('/api/fitness/:id', FitnessController.findOneFitness);
+  app.get('/api/fitness/:id', FitnessController.findFitness);
   app.post('/api/fitness', FitnessController.createFitness);
   app.put('/api/fitness/:id', FitnessController.updateFitness);
   app.delete('/api/fitness/:id', FitnessController.deleteFitness);
