@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const UserLogin = ({ setIsLoggedin }) => {
+const UserLogin = ({ setLoggedIn }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: '',
@@ -19,8 +19,8 @@ const UserLogin = ({ setIsLoggedin }) => {
       .post('http://localhost:8000/login', user, { withCredentials: true })
       .then((res) => {
         console.log(res.data);
-        setIsLoggedin(true);
-        navigate('/');
+        setLoggedIn(true);
+        navigate('/dashboard');
       })
       .catch((err) => console.log(err));
   };
