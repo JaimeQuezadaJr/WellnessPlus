@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -7,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from "./GoalList.module.css";
 
-const GoalList = ({goals, category, complete, setComplete}) => {
+const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
 
   const navigate = useNavigate();
 
@@ -19,26 +18,23 @@ const GoalList = ({goals, category, complete, setComplete}) => {
   }
 
   const onCompleteHandler = (e, goalId) => {
-    //TODO set put request and move setComplete to then in response
-    console.log(e, complete);
-    
     axios.put(`http://localhost:5000/api/${category}/${goalId}`, {"complete": !complete[goalId]})
-      .then(res => {
-        console.log(res);
-        setComplete({...complete, [goalId]: !complete[goalId]})
-      })
+      .then(res => setComplete({...complete, [goalId]: !complete[goalId]}))
       .catch(err => console.log(err));
   }
 
-
-  //TODO change edit & add button navigate
+  const onDeleteHandler = (e, goalId) => {
+    axios.delete(`http://localhost:5000/api/${category}/${goalId}`)
+    .then(res => setGoals(goals.filter(goal => goal._id !== goalId)))
+    .catch(err => console.log(err));
+  }
 
   return (
     <div className={`${styles.goalContainer} p-5 m-5`}>
       {JSON.stringify(goals)}
       { goals.map( (goal, index) =>
         <Row key={index}>
-          <Col sm={8}>
+          <Col sm={6}>
             <p className={complete[goal._id]? styles.goalComplete: styles.goalNotComplete} id={'goal-description'}>{goal.description}</p>
             <Row as={'dl'} className={'g-5'}>
               <Col>
@@ -55,17 +51,18 @@ const GoalList = ({goals, category, complete, setComplete}) => {
               </Col>
             </Row>
           </Col>
-          <Col sm={4}>
+          <Col sm={6}>
               { complete[goal._id]
                 ? <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'secondary'} className={'me-3'}>Completed</Button>
                 : <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'primary'} className={'me-3'}>Complete</Button>
               }
-              <Button onClick={() => navigate('/goal/edit/nutrition/1')}>Edit</Button>
+              <Button onClick={ (e) => onDeleteHandler(e, goal._id) } className={'me-3'}>Delete</Button>
+              <Button onClick={() => navigate(`/goal/edit/${category}/${goal._id}`)}>Edit</Button>
           </Col>
         </Row>
       )}
       <Col md={6} className="my-5 d-grid mx-md-3 mx-auto">
-        <Button onClick={() => navigate('/goal/add/nutrition')}>Add Goal</Button>
+        <Button onClick={() => navigate(`/goal/add/${category}`)}>Add Goal</Button>
       </Col>
     </div>
   )
