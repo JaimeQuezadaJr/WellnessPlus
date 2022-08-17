@@ -27,19 +27,23 @@ module.exports.findOneFitness = (req, res) => {
 }
 
 module.exports.findFitnessByUser = (req, res) => {
-    console.log('IS THIS WORKING', req.params.email);
-    User.findOne({ email: req.params.email }).then((user) => {   //TODO decide whether to keep it until complete front end useState/localstorage
-        console.log('USERID', user._id);
-        Fitness.find({ createdBy: req.params.userId }) //TODO may need to change find parameter (user._id)
-        .populate('createdBy', '_id email')
-        .then((fitness) => {
-            res.json(fitness);
-        })
-        .catch((err) => {
-            console.log('ERROR', err);
-            res.status(400).json({ message: 'something went wrong in find all fitness goals', error: err });
-        })
-})
+  // console.log('IS THIS WORKING', req.params.email);
+  User.findOne({ email: req.params.email })
+    .then((user) => {   //TODO decide whether to keep it until complete front end useState/localstorage
+      // console.log('USERID', user._id);
+      Fitness.find({ createdBy: req.params.userId }) //TODO may need to change find parameter (user._id)
+      .populate('createdBy', '_id email')
+      .then((fitness) => {
+          res.json(fitness);
+      })
+      .catch((err) => {
+          console.log('ERROR', err);
+          res.status(400).json({ message: 'something went wrong in find all fitness goals', error: err });
+      })
+  })
+  .catch((err) => {
+      res.status(400).json({ message: 'something went wrong in find all Fitness', error: err });
+  });
 }
 
 module.exports.createFitness = (req, res) => {
