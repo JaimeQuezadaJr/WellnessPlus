@@ -23,15 +23,15 @@ module.exports.findOneNutrition = (req, res) => {
         })
         .catch((err) => {
             console.log('ERROR IN Get Nutrition', err);
-            res.status(400).json({message: 'Something went wrong', error:err})
+            res.status(400).json({message: 'Something went wrong', error:err})  
         });
 }
 
 module.exports.findNutritionByUser = (req, res) => {
-    console.log('IS THIS WORKING', req.params.email);
+    console.log('IS THIS WORKING', req.params.id); 
     User.findOne({ email: req.params.email }).then((user) => {   //TODO decide whether to keep it until complete front end useState/localstorage
-        console.log('USERID', user._id);
-        Nutrition.find({ createdBy: req.params.userId }) //TODO may need to change find parameter (user._id)
+        // console.log('USERID', user._id);
+        Nutrition.find({ createdBy: user._id }) //TODO may need to change find parameter (user._id)
         .populate('createdBy', '_id email')
         .then((nutrition) => {
             res.json(nutrition);

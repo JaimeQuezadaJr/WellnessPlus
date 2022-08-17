@@ -3,7 +3,7 @@ const NutritionController = require('../controllers/nutrition.controller');
 
 module.exports = (app) => { //app = express()
   app.get('/api/nutrition', NutritionController.findAllNutritions);
-  app.get('/api/nutrition/user/:userId', NutritionController.findNutritionByUser);
+  app.get('/api/nutrition/user/:email', NutritionController.findNutritionByUser);
   app.get('/api/nutrition/:id', NutritionController.findOneNutrition);
   app.post('/api/nutrition', NutritionController.createNutrition);
   app.put('/api/nutrition/:id', NutritionController.updateNutrition);
@@ -16,4 +16,4 @@ module.exports = (app) => { //app = express()
   // app.put('/api/nutrition/:id', authenticate, NutritionController.updateNutrition);
   // app.delete('/api/nutrition/:id', authenticate, NutritionController.deleteNutrition);
 
-}
+} 

@@ -10,7 +10,7 @@ module.exports.register = async (req, res) => {
         const newUser = await user.save();
         console.log('USER CREATED', newUser);
         const userToken = jwt.sign(
-            { _id: newUser._id, email: newUser.email, username: newUser.username },
+            { _id: newUser._id, email: newUser.email, firstName: newUser.firstName, lastName: newUser.lastName},
             SECRET,
         );
         console.log('JWT:', userToken);

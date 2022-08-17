@@ -20,7 +20,7 @@ const UserLogin = ({ setIsLoggedin }) => {
       .then((res) => {
         console.log(res.data);
         setIsLoggedin(true);
-        navigate('/');
+        navigate('/dashboard');
       })
       .catch((err) => console.log(err));
   };
@@ -29,7 +29,7 @@ const UserLogin = ({ setIsLoggedin }) => {
       <label htmlFor="email">Email:</label>
       <input type="email" name="email" value={user.email} onChange={handleChange} required />
       <label htmlFor="password">Password:</label>
-      <input type="text" name="password" value={user.password} onChange={handleChange} required />
+      <input type="password" name="password" value={user.password} onChange={handleChange} required />
       <button>Login</button>
     </form>
   );
