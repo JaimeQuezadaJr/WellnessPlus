@@ -12,7 +12,7 @@ const FitnessSchema = mongoose.Schema(
         completedBy: {
             type: Date,
             required: [true, 'Please add goal completion date'],
-            min: Date.now
+            min: [Date.now, 'Please give yourself at least one day to complete the goal']
         },
         complete: {
           type: Boolean,
@@ -28,5 +28,5 @@ const FitnessSchema = mongoose.Schema(
     }
 )
 
-const Fitness = mongoose.model('fitness', FitnessSchema);
-module.exports = Fitness;
+
+module.exports = mongoose.model('fitness', FitnessSchema);

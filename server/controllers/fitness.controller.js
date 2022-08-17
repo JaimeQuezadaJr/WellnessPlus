@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const SECRET = process.env.JWT_SECRET;
 const User = require('../models/user.model');
 
-
 module.exports.findAllFitnessGoals = (req, res) => {
     Nutrition.find({})
         .populate('createdBy', 'email')
@@ -69,15 +68,14 @@ module.exports.updateFitness = (req, res) => {
             console.log('ERROR IN update Fitness', err);
             res.status(400).json({message: 'Something went wrong', error:err})
         });
-
 }
 
 module.exports.deleteFitness = (req,res) => {
-    Fitness.deleteOne({ _id: req.params.id })
-        .then((result) => {
-            res.json({result:result})
-        })
-        .catch((err) => {
-            res.status(400).json({message: 'Something went wrong', error:err})
-        });
-} 
+  Fitness.deleteOne({ _id: req.params.id })
+    .then((result) => {
+        res.json({result:result})
+    })
+    .catch((err) => {
+        res.status(400).json({message: 'Something went wrong', error:err})
+    });
+}

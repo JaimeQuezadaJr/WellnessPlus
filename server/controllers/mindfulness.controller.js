@@ -4,6 +4,7 @@ const SECRET = process.env.JWT_SECRET;
 const User = require('../models/user.model');
 
 
+
 module.exports.findAllMindfulnessGoals = (req, res) => {
     Mindfulness.find({})
         .populate('createdBy', 'email')
@@ -18,8 +19,8 @@ module.exports.findAllMindfulnessGoals = (req, res) => {
 
 module.exports.findOneMindfulness = (req, res) => {
     Mindfulness.findOne({_id:req.params.id})
-        .then((oneMindfulness) => {
-            res.json(oneMindfulness)
+        .then((mindfullness) => {
+            res.json(mindfullness)
         })
         .catch((err) => {
             console.log('ERROR IN Get Mindfulness', err);
@@ -28,6 +29,7 @@ module.exports.findOneMindfulness = (req, res) => {
 }
 
 module.exports.findMindfulnessByUser = (req, res) => {
+
     console.log('IS THIS WORKING', req.params.email);
     User.findOne({ email: req.params.email }).then((user) => {   //TODO decide whether to keep it until complete front end useState/localstorage
         console.log('USERID', user._id);
@@ -73,11 +75,11 @@ module.exports.updateMindfulness = (req, res) => {
 }
 
 module.exports.deleteMindfulness = (req,res) => {
-    Mindfulness.deleteOne({ _id: req.params.id })
-        .then((result) => {
-            res.json({result:result})
-        })
-        .catch((err) => {
-            res.status(400).json({message: 'Something went wrong', error:err})
-        });
+  Mindfulness.deleteOne({ _id: req.params.id })
+    .then((result) => {
+        res.json({result:result})
+    })
+    .catch((err) => {
+        res.status(400).json({message: 'Something went wrong', error:err})
+    });
 } 
