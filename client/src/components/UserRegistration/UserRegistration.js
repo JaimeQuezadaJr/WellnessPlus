@@ -35,7 +35,7 @@ const UserRegistration = ({ setIsLoggedin }) => {
       <label htmlFor="firstName">First Name:</label>
       <input type="text" name="firstName" value={user.firstName} onChange={handleChange} required />
       <label htmlFor="lastName">Last Name:</label>
-      <input type="text" name="lastName" value={user.lasttName} onChange={handleChange} required />
+      <input type="text" name="lastName" value={user.lastName} onChange={handleChange} required />
       <label htmlFor="age">Age:</label>
       <input type="number" name="age" value={user.age} onChange={handleChange} required />
       <label htmlFor="email">Email:</label>
