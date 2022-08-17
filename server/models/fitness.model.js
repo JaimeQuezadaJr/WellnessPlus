@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const MindfulnessSchema = mongoose.Schema(
+const FitnessSchema = mongoose.Schema(
     {
         description: {
             type: String,
@@ -28,5 +28,5 @@ const MindfulnessSchema = mongoose.Schema(
     }
 )
 
-const Mindfulness = mongoose.model('mindfulness', MindfulnessSchema);
-module.exports = Mindfulness;
+
+module.exports = mongoose.model('fitness', FitnessSchema);
