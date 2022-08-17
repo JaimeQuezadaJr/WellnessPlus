@@ -9,15 +9,19 @@ import UserLogin from './components/UserLogin/UserLogin';
 import UserRegistration from './components/UserRegistration/UserRegistration';
 
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  
+  const [loggedIn, setLoggedIn] = useState(false);
+  
   return (
     <div>
       <BrowserRouter>
-        <Header/>
+        <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
         <Routes>
-          <Route path={'/'} element={<UserLogin/>} />
-          <Route path={'/register'} element={<UserRegistration/>} />
+          <Route path={'/'} element={<UserLogin setLoggedIn={setLoggedIn}/>} />
+          <Route path={'/register'} element={<UserRegistration setLoggedIn={setLoggedIn}/>}/>
           <Route path={'/about'} element={<About/>} />
           <Route path={'/dashboard'} element={<GoalDashboard/>} />
           <Route path={'/goal/add/:category'} element={<GoalAdd/>} />

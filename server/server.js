@@ -1,17 +1,24 @@
+//imports
 require ('./config/mongoose.config')
 require('dotenv').config();
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 4000;
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-app.use(cookieParser());
+const port = process.env.PORT || 4000;
+
+// create express app object
+const app = express();
+
+// express
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
-app.use(cors({ origin: 'http://localhost:3000'}));
-// app.use(cors());
+// cookie & jwt
+// app.use(cors()); //if without cookie-parse
+app.use(cookieParser());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true}));
 
-
+// routes for login & registration
 const userRoutes = require('./routes/user.routes');
 userRoutes(app);
 

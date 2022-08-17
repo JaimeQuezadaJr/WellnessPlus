@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios' 
 import { useNavigate } from 'react-router-dom'
 
-const UserRegistration = ({ setIsLoggedin }) => {
+const UserRegistration = ({ setLoggedIn }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     firstName: '',
@@ -24,7 +24,7 @@ const UserRegistration = ({ setIsLoggedin }) => {
       .post('http://localhost:8000/register', user, { withCredentials: true })
       .then((res) => {
         console.log(res.data);
-        setIsLoggedin(true);
+        setLoggedIn(true);
         navigate('/');
       })
       .catch((err) => console.log(err));
