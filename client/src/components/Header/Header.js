@@ -1,10 +1,33 @@
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import { useEffect } from 'react';
 
-const Header = (props) => {
+const Header = ({setLoggedIn, loggedIn, setUserId}) => {
+
+  useEffect(() => {
+
+    axios.get('http://localhost:8000/api/current-user', { withCredentials: true })
+      .then( res => {
+        console.log("====== working header axios", res)
+        setLoggedIn(true);
+        setUserId(res.data._id);
+      })
+      .catch(err => {
+        console.log(err);
+        setLoggedIn(false);
+      });
+    
+    // if (loggedIn) {
+    //   setHeaderLink([["Write New Post", '/post/new'], ["Profile", `/user`]])
+    // } else {
+    //   setHeaderLink([["Log In", "/"], ["Create Account", "/register"]])
+    // }
+  
+  }, [loggedIn])
 
   return (
     <div>
