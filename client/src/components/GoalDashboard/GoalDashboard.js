@@ -38,7 +38,7 @@ const GoalDashboard = (props) => {
           <Button onClick={ (e) => setCategory(e.target.value) } value={'mindfulness'}>Mindfulness</Button>
         </ButtonGroup>
       </div>
-      <GoalList goals={goals} category={category} complete={complete} setComplete={setComplete}/>
+      <GoalList setGoals={setGoals} goals={goals} category={category} complete={complete} setComplete={setComplete}/>
     </div>
   )
 }
