@@ -2,7 +2,7 @@ const FitnessController = require('../controllers/fitness.controller');
 // const { authenticate } = require('../config/jwt.config'); //TODO include if implement JWT
 
 module.exports = (app) => { //app = express()
-  app.get('/api/fitness', FitnessController.findAllFitness);
+  app.get('/api/fitness', FitnessController.findAllFitnessGoals);
   app.get('/api/fitness/user/:userId', FitnessController.findFitnessByUser);
   app.get('/api/fitness/:id', FitnessController.findOneFitness);
   app.post('/api/fitness', FitnessController.createFitness);
