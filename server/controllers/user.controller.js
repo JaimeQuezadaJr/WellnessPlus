@@ -58,6 +58,7 @@ module.exports.logout = (req, res) => {
 }
 
 module.exports.getLoggedInUser = async (req, res) => {
+  try {
     const user = jwt.verify(req.cookies.userToken, SECRET);
     User.findOne({ _id: user._id })
         .then((user) => {
@@ -66,6 +67,10 @@ module.exports.getLoggedInUser = async (req, res) => {
         .catch((err) => {
             console.log(err);
     });
+  } catch (err) {
+    console.log({err3: err});
+    res.status(400).json({err});
+  }
 }
 
 module.exports.findAllUsers = (req, res) => {

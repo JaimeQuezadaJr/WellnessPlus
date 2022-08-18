@@ -1,15 +1,23 @@
-import {Link} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button'
+
 import Nav from 'react-bootstrap/Nav';
-import { useEffect } from 'react';
 
 const Header = ({setLoggedIn, loggedIn, setUserId}) => {
 
+  const navigate = useNavigate();
+  const [headerLink, setHeaderLink] = useState([["About", "/about"], ["Register", "/register"]])
+
+
   useEffect(() => {
 
+    if (loggedIn) {
+    console.log("should be logged in, from header");
     axios.get('http://localhost:8000/api/current-user', { withCredentials: true })
       .then( res => {
         console.log("====== working header axios", res)
@@ -19,15 +27,28 @@ const Header = ({setLoggedIn, loggedIn, setUserId}) => {
       .catch(err => {
         console.log(err);
         setLoggedIn(false);
+        setUserId(null);
       });
+    }
     
-    // if (loggedIn) {
-    //   setHeaderLink([["Write New Post", '/post/new'], ["Profile", `/user`]])
-    // } else {
-    //   setHeaderLink([["Log In", "/"], ["Create Account", "/register"]])
-    // }
+    if (loggedIn) {
+      setHeaderLink([["About", "/about"], ["Dashboard", "/dashboard"]])
+    } else {
+      setHeaderLink([["About", "/about"], ["Register", "/register"]])
+    }
   
   }, [loggedIn])
+
+  const onLogOut = () => {
+
+    axios.post('http://localhost:8000/logout',{} , {withCredentials: true})
+      .then(res => {
+        setLoggedIn(false);
+        setUserId(null)
+      })
+      .catch(err => console.log(err))
+    navigate('/');
+  }
 
   return (
     <div>
@@ -38,8 +59,12 @@ const Header = ({setLoggedIn, loggedIn, setUserId}) => {
             <Navbar.Toggle aria-controls='wellnessplus-nav' />
             <Navbar.Collapse id="wellnessplus-nav">
               <Nav className='me-auto'>
-                <Nav.Link as={Link} to={'/about'}>About</Nav.Link>
-                <Nav.Link as={Link} to={'/register'}>Register</Nav.Link>
+              { headerLink.map( (link, index) =>
+                <Nav.Link as={Link} to={link[1]} key={index} className={"header-link"}>{link[0]}</Nav.Link>
+              )}
+              { loggedIn &&
+                <Button onClick={onLogOut} variant="outline-primary" size='sm' className='ms-3'>Log out</Button>
+              }
               </Nav>
             </Navbar.Collapse>
           </div>
