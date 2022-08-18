@@ -13,7 +13,7 @@ const GoalForm = (props) => {
   }
 
   const onChangeHandler = (e) => {
-    setGoal({...goal, [e.target.name]: e.target.value });
+    setGoal({...goal, [e.target.name]: e.target.value }); 
   }
 
   const onSubmitHandler = (e) => {

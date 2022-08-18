@@ -1,5 +1,3 @@
-
-
 const mongoose = require('mongoose');
 
 const FitnessSchema = mongoose.Schema(
@@ -15,8 +13,8 @@ const FitnessSchema = mongoose.Schema(
             min: [Date.now, 'Please give yourself at least one day to complete the goal']
         },
         complete: {
-          type: Boolean,
-          default: false
+            type: Boolean,
+            default: false
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
@@ -28,5 +26,5 @@ const FitnessSchema = mongoose.Schema(
     }
 )
 
-
-module.exports = mongoose.model('fitness', FitnessSchema);
+const Fitness = mongoose.model('fitness', FitnessSchema);
+module.exports = Fitness;

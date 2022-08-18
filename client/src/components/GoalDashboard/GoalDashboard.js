@@ -4,19 +4,22 @@ import axios from "axios";
 import GoalList from "../GoalList/GoalList";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import { useParams } from "react-router-dom";
 
-const GoalDashboard = ({userId}) => {
+const GoalDashboard = () => {
 
   // const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
 
   const [goals, setGoals] = useState([]);
   const [category, setCategory] = useState("nutrition");
   const [complete, setComplete] = useState({});
+  const {firstName} = useParams();
 
   useEffect(() =>{
     //TODO get all three goals from backend
-    axios.get(`http://localhost:8000/api/${category}/user/${userId}`)
+    axios.get(`http://localhost:8000/api/${category}/user/${firstName}`, { withCredentials: true})
       .then(res => {
+        console.log(res.data)
         setGoals(res.data)
 
         let tempComplete = {};
@@ -24,12 +27,12 @@ const GoalDashboard = ({userId}) => {
         setComplete(tempComplete);
       })
       .catch(err => console.log(err));
-  },[category, userId])
+  },[category])
   
   return (
     <div className="m-5">
       <div className="my-3">
-        <h2>Welcome user!</h2>
+        <h2>Welcome {firstName} !</h2>
       </div>
       <div className="mx-5 mt-5">
         <ButtonGroup>

@@ -18,7 +18,7 @@ const GoalAdd = ({userId}) => {
     return tomorrow.setDate(today.getDate() + 1);
   }
 
-  const [goal, setGoal] = useState({
+  const [goal, setGoal] = useState({ 
     "description": "",
     "completedBy": defaultCompletedBy(),
   });
