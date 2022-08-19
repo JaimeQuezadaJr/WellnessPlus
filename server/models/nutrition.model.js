@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const NutritionSchema = mongoose.Schema(
@@ -14,8 +13,8 @@ const NutritionSchema = mongoose.Schema(
             min: [Date.now, 'Please give yourself at least one day to complete the goal']
         },
         complete: {
-          type: Boolean,
-          default: false
+            type: Boolean,
+            default: false
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,

@@ -18,20 +18,20 @@ const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
   }
 
   const onCompleteHandler = (e, goalId) => {
-    axios.put(`http://localhost:8000/api/${category}/${goalId}`, {"complete": !complete[goalId]})
+    axios.put(`http://localhost:8000/api/${category}/${goalId}`, {"complete": !complete[goalId]}, { withCredentials: true })
       .then(res => setComplete({...complete, [goalId]: !complete[goalId]}))
       .catch(err => console.log(err));
   }
 
   const onDeleteHandler = (e, goalId) => {
-    axios.delete(`http://localhost:8000/api/${category}/${goalId}`)
+    axios.delete(`http://localhost:8000/api/${category}/${goalId}`, {withCredentials:true})
     .then(res => setGoals(goals.filter(goal => goal._id !== goalId)))
     .catch(err => console.log(err));
   }
 
   return (
     <div className={`${styles.goalContainer} p-5 m-5`}>
-      {JSON.stringify(goals)}
+      {/* {JSON.stringify(goals)} */}
       { goals.map( (goal, index) =>
         <Row key={index}>
           <Col sm={6}>

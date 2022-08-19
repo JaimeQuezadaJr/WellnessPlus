@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const UserLogin = ({ setLoggedIn, setUserId }) => {
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+const UserLogin = ({ setLoggedIn }) => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({})
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -18,20 +23,33 @@ const UserLogin = ({ setLoggedIn, setUserId }) => {
     axios
       .post('http://localhost:8000/login', user, { withCredentials: true })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setLoggedIn(true);
         navigate('/dashboard');
       })
       .catch((err) => console.log(err));
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="email">Email:</label>
-      <input type="email" name="email" value={user.email} onChange={handleChange} required />
-      <label htmlFor="password">Password:</label>
-      <input type="text" name="password" value={user.password} onChange={handleChange} required />
-      <button>Login</button>
-    </form>
+      <Form onSubmit={handleSubmit}>
+        <Container>
+          <Form.Group className="mb-3 col-md-4" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" name="email" placeholder="Enter email" value={user.email} onChange={handleChange} required />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+            {/* {errors.email && <p className='validation'>- {errors.email.message}</p>} */}
+          </Form.Group>
+
+          <Form.Group className="mb-3 col-md-4" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange} required/>
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Login
+          </Button>
+        </Container>
+      </Form>
   );
 };
 

@@ -1,76 +1,64 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { NavLink } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+
 import Button from 'react-bootstrap/Button'
 
 import Nav from 'react-bootstrap/Nav';
 
-const Header = ({setLoggedIn, loggedIn, setUserId}) => {
-
+const Header = ({loggedIn, setLoggedIn }) => {
   const navigate = useNavigate();
-  const [headerLink, setHeaderLink] = useState([["About", "/about"], ["Register", "/register"]])
-
-
-  useEffect(() => {
-
-    if (loggedIn) {
-    console.log("should be logged in, from header");
-    axios.get('http://localhost:8000/api/current-user', { withCredentials: true })
-      .then( res => {
-        console.log("====== working header axios", res)
-        setLoggedIn(true);
-        setUserId(res.data._id);
-      })
-      .catch(err => {
-        console.log(err);
-        setLoggedIn(false);
-        setUserId(null);
-      });
-    }
+  const [user, setUser] = useState(null);
     
-    if (loggedIn) {
-      setHeaderLink([["About", "/about"], ["Dashboard", "/dashboard"]])
-    } else {
-      setHeaderLink([["About", "/about"], ["Register", "/register"]])
-    }
-  
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/api/current-user', { withCredentials: true })
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => console.log(err));
   }, [loggedIn])
 
   const onLogOut = () => {
-
-    axios.post('http://localhost:8000/logout',{} , {withCredentials: true})
-      .then(res => {
-        setLoggedIn(false);
-        setUserId(null)
-      })
-      .catch(err => console.log(err))
-    navigate('/');
-  }
+    axios
+    .post('http://localhost:8000/logout',{}, { withCredentials: true })
+    .then((res) => {
+        console.log(res.data);
+        setUser(null);
+        navigate('/')
+    })
+    .catch((err) => console.log(err));
+  };
 
   return (
-    <div>
-      <Navbar expand="md" className='pt-3'>
-        <Container>
-          <Navbar.Brand as={Link} to={'/'}>WellnessPlus</Navbar.Brand>
-          <div className='justify-content-end'>
-            <Navbar.Toggle aria-controls='wellnessplus-nav' />
-            <Navbar.Collapse id="wellnessplus-nav">
-              <Nav className='me-auto'>
-              { headerLink.map( (link, index) =>
-                <Nav.Link as={Link} to={link[1]} key={index} className={"header-link"}>{link[0]}</Nav.Link>
-              )}
-              { loggedIn &&
-                <Button onClick={onLogOut} variant="outline-primary" size='sm' className='ms-3'>Log out</Button>
-              }
+    <Navbar>
+      <Container>
+        <Navbar.Brand href="/">WellnessPlus</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          {user ? (
+              <Nav className=" justify-contend-end">
+                <Nav.Link href="/about">About</Nav.Link>
+                <Nav.Link href="/dashboard">Home</Nav.Link>
+                <Nav.Link href='/logout'>Logout</Nav.Link>
+                <Button variant="primary" onClick={onLogOut}>Logout</Button>
+            </Nav>
+          ) : (
+              <Nav className=" justify-contend-end">
+                <Nav.Link href="/about">About</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
               </Nav>
-            </Navbar.Collapse>
-          </div>
-        </Container>
-      </Navbar>
-    </div>
-  )
+          )}
+        
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+    
+  );
 }
+
 export default Header;
