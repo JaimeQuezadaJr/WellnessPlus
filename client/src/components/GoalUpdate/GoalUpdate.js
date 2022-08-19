@@ -10,7 +10,7 @@ const GoalUpdate = ({userId}) => {
   const {category, id} = useParams();
   const navigate = useNavigate();
 
-  const [goal, setGoal] = useState({
+  const [goal, setGoal] = useState({ 
     "description": "",
     "completedBy": "",
   });
@@ -19,7 +19,7 @@ const GoalUpdate = ({userId}) => {
   // const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/${category}/${id}`) //TODO confirm axios path and add authorization
+    axios.get(`http://localhost:8000/api/${category}/${id}`, { withCredentials: true }) //TODO confirm axios path and add authorization
     .then( res => {
       setGoal(res.data);
       setLoaded(true);
@@ -28,7 +28,7 @@ const GoalUpdate = ({userId}) => {
   }, [category, id])
 
   const putSubmit = () => {
-    axios.put(`http://localhost:8000/api/${category}/${id}`, goal) //TODO confirm axios path and add authorization
+    axios.put(`http://localhost:8000/api/${category}/${id}`, goal, { withCredentials: true }) //TODO confirm axios path and add authorization
     .then(res => navigate('/dashboard'))
     .catch(err => {
       setError(err.response.data.error.errors);

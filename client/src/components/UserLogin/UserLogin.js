@@ -38,6 +38,7 @@ const UserLogin = ({ setLoggedIn }) => {
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
+            {/* {errors.email && <p className='validation'>- {errors.email.message}</p>} */}
           </Form.Group>
 
           <Form.Group className="mb-3 col-md-4" controlId="formBasicPassword">

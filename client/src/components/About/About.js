@@ -12,7 +12,7 @@ const About = (props) => {
       <div className={styles.aboutText}>
         <h3 className={styles.textContainer}>Become more in tune with yourself!</h3>
         <p className={styles.textContainer}>Commit yourself to achieving your maximum wellness goals!</p>
-        <Button variant={"outline-dark"} onClick={() => navigate('/')}>Get Started</Button>
+        <Button variant={"outline-dark"} onClick={() => navigate('/login')}>Get Started</Button>
       </div>
     </div>
   )

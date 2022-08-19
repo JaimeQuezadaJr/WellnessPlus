@@ -23,7 +23,7 @@ const GoalDashboard = ({isLoggedin}) => {
         console.log(res.data)
         setUser(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err)); 
   }, [isLoggedin]);
 
   useEffect(() =>{
