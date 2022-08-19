@@ -31,7 +31,7 @@ const GoalUpdate = ({userId}) => {
     axios.put(`http://localhost:8000/api/${category}/${id}`, goal, { withCredentials: true }) //TODO confirm axios path and add authorization
     .then(res => navigate('/dashboard'))
     .catch(err => {
-      setError(err.response.data.error.errors);
+      setError(err.response.data.errors);
       console.log(err)
     })
   }
