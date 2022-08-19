@@ -5,23 +5,23 @@ const UserSchema = mongoose.Schema(
     {
         firstName: {
         type: String,
-        required: [true, 'username is required'],
+        required: [true, 'First Name is required'],
     },
         lastName: {
         type: String,
-        required: [true, 'username is required'],
+        required: [true, 'Last Name is required'],
     },
         age: {
         type: Number,
-        required: [true, 'age is required'],
+        required: [true, 'Age is required'],
     },
         email: {
         type: String,
-        required: [true, 'email is required'],
+        required: [true, 'Email is required'],
     },
         password: {
         type: String,
-        required: [true, 'password is required'],
+        required: [true, 'Password is required'],
     },
     },
     { timestamps: true }, 
@@ -33,7 +33,7 @@ UserSchema.virtual('confirmPassword')
 
 UserSchema.pre('validate', function (next) {
     if (this.password !== this.confirmPassword) {
-        this.invalidate('confirmPassword', 'Passwords must Match!!!');
+        this.invalidate('confirmPassword', 'Passwords must match!');
     }
     next();
 });
