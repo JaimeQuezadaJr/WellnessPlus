@@ -1,10 +1,30 @@
-import React from 'react'
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 
-const home = () => {
+const HomePage = ({setLoggedIn}) => {
+
+  const navigate = useNavigate();
+  const [btnLink, setBtnLink] = useState([]);
+  
+  useEffect(() => {
+    axios
+    .get('http://localhost:8000/api/current-user', { withCredentials: true })
+    .then((res) => {
+      setLoggedIn(true);
+      setBtnLink(['/dashboard', 'Start Tracking']);
+    })
+    .catch((err) => {
+      setBtnLink(['/login', 'Get Started']);
+      console.log(err)
+    });
+
+  },[])
+
   return (
     <Container className='mt-5 mb-5'>
       <Card className='col-lg-6'>
@@ -14,11 +34,11 @@ const home = () => {
           <Card.Text>
             Commit yourself to achieving your maximum wellness goals!
           </Card.Text>
-          <Nav.Link href='/login'><Button variant="primary">Get Started</Button></Nav.Link>
+          <Button variant="primary" onClick={() => navigate(btnLink[0])}>{btnLink[1]}</Button>
         </Card.Body>
       </Card>
     </Container>
   )
 }
 
-export default home;
+export default HomePage;

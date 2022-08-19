@@ -1,16 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import GoalForm from '../GoalForm/GoalForm';
 
 
-const GoalAdd = ({userId}) => {
+const GoalAdd = ({setLoggedIn}) => {
 
   const {category} = useParams();
   const navigate = useNavigate();
 
-  // const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/api/current-user', { withCredentials: true })
+      .then((res) => {
+        setLoggedIn(true);
+      })
+      .catch((err) => {
+        navigate('/');
+        console.log(err)
+      });
+  }, [])
+
 
   const defaultCompletedBy = () => {
     let today = new Date();
@@ -27,7 +38,7 @@ const GoalAdd = ({userId}) => {
 
 
   const postSubmit = () => {
-    axios.post(`http://localhost:8000/api/${category}`, {...goal, createdBy: userId}, {withCredentials:true}) //TODO confirm axios path and add authorization
+    axios.post(`http://localhost:8000/api/${category}`, goal, {withCredentials:true})
     .then(res => navigate('/dashboard'))
     .catch(err => {
       setError(err.response.data.errors);
@@ -36,7 +47,7 @@ const GoalAdd = ({userId}) => {
   }
 
   return (
-    <GoalForm action={"Add"} category={category} userId={userId} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error}/>
+    <GoalForm action={"Add"} category={category} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error}/>
   )
 }
 export default GoalAdd
