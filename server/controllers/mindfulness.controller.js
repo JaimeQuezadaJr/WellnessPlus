@@ -15,13 +15,13 @@ module.exports = {
       });
   },
   findMindfulnessByUser: (req, res) => {
-    console.log('IS THIS WORKING', req.params.firstName);
-    User.findOne({ firstName: req.params.firstName }).then((user) => {
+    console.log('IS THIS WORKING', req.params.id);
+    User.findOne({ _id: req.params.id }).then((user) => { 
       console.log('USERID', user._id);
       Mindfulness.find({ createdBy: user._id })
         .populate('createdBy', 'firstName lastName age email') 
         .then((mindfulness) => {
-          console.log('mindfulnessSS'.mindfulness);
+          console.log('mindfulnessSS', mindfulness);
           res.json(mindfulness);
         })
         .catch((err) => {

@@ -21,7 +21,7 @@ module.exports = {
       Nutrition.find({ createdBy: user._id })
         .populate('createdBy', 'firstName lastName age email') 
         .then((nutritions) => {
-          console.log('nutritionsSS'.nutritions);
+          console.log('nutritionsSS', nutritions);
           res.json(nutritions);
         })
         .catch((err) => {

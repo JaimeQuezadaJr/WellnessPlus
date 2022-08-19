@@ -28,7 +28,7 @@ const UserRegistration = ({ setLoggedIn }) => {
       .then((res) => {
         console.log(res.data);
         setLoggedIn(true);
-        navigate('/');
+        navigate('/dashboard');
       })
       .catch((err) => console.log(err));
   };

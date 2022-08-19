@@ -15,13 +15,13 @@ module.exports = {
       });
   },
   findFitnessByUser: (req, res) => {
-    console.log('IS THIS WORKING', req.params.firstName);
-    User.findOne({ firstName: req.params.firstName }).then((user) => {
+    console.log('IS THIS WORKING', req.params.id);
+    User.findOne({ _id: req.params.id }).then((user) => {
       console.log('USERID', user._id);
       Fitness.find({ createdBy: user._id })
         .populate('createdBy', 'firstName lastName age email') 
         .then((fitness) => {
-          console.log('fitnessSS'.fitness);
+          console.log('fitnessSS', fitness);
           res.json(fitness);
         })
         .catch((err) => {
