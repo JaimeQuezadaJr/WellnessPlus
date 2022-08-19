@@ -4,46 +4,41 @@ import axios from "axios";
 import GoalList from "../GoalList/GoalList";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import { useParams } from "react-router-dom";
 
-const GoalDashboard = ({isLoggedin}) => {
-
-  // const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
+const GoalDashboard = (props) => {
 
   const [goals, setGoals] = useState([]);
   const [category, setCategory] = useState("nutrition");
   const [complete, setComplete] = useState({});
-  const [user, setUser] = useState({});
-  const {email} = useParams();
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     axios
       .get('http://localhost:8000/api/current-user', { withCredentials: true })
       .then((res) => {
         console.log(res.data)
-        setUser(res.data);
+        setUser(res.data.firstName);
+        
+        //TODO get all three goals from backend
+        axios.get(`http://localhost:8000/api/${category}/user/${res.data._id}`, { withCredentials: true})
+        .then(res => {
+          console.log(res.data)
+          setGoals(res.data)
+
+          let tempComplete = {};
+          res.data.map((goal) => tempComplete[goal._id] = goal.complete);
+          setComplete(tempComplete);
+        })
+        .catch(err => console.log(err));
+        
       })
       .catch((err) => console.log(err)); 
-  }, [isLoggedin]);
-
-  useEffect(() =>{
-    //TODO get all three goals from backend
-    axios.get(`http://localhost:8000/api/${category}/user/${user._id}`, { withCredentials: true})
-      .then(res => {
-        console.log(res.data)
-        setGoals(res.data)
-
-        let tempComplete = {};
-        res.data.map((goal) => tempComplete[goal._id] = goal.complete);
-        setComplete(tempComplete);
-      })
-      .catch(err => console.log(err));
-  },[category,user])
+  }, [category]);
   
   return (
     <div className="m-5">
       <div className="my-3">
-        <h2>Welcome {user.firstName} !</h2>
+        <h2>Welcome {user} !</h2>
       </div>
       <div className="mx-5 mt-5">
         <ButtonGroup>
