@@ -26,7 +26,7 @@ function App() {
           <Route path={'/login'} element={<UserLogin setLoggedIn={setLoggedIn} />} />
           <Route path={'/register'} element={<UserRegistration setLoggedIn={setLoggedIn} />}/>
           <Route path={'/about'} element={<About/>} />
-          <Route path={'/dashboard'} element={<GoalDashboard />} />
+          <Route path={'/dashboard/'} element={<GoalDashboard />} />
           <Route path={'/goal/add/:category'} element={<GoalAdd />} />
           <Route path={'/goal/edit/:category/:id'} element={<GoalUpdate />} />
         </Routes>

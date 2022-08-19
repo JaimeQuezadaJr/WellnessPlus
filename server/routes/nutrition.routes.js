@@ -3,11 +3,11 @@ const NutritionController = require('../controllers/nutrition.controller');
 
 module.exports = (app) => { 
   app.get('/api/nutrition', NutritionController.findAllNutritions);
-  app.get('/api/nutrition/user/:firstName', NutritionController.findNutritionByUser);
+  app.get('/api/nutrition/user/:id', NutritionController.findNutritionByUser); 
   app.get('/api/nutrition/:id', NutritionController.findOneNutrition);
   app.post('/api/nutrition', NutritionController.createNutrition);
   app.put('/api/nutrition/:id', NutritionController.updateNutrition);
-  app.delete('/api/nutrition/:id', NutritionController.deleteNutrition);
+  app.delete('/api/nutrition/:id', NutritionController.deleteNutrition); 
   
   //TODO use below if implement JWT
   // app.get('/api/nutrition', authenticate, NutritionController.findAllNutritions);

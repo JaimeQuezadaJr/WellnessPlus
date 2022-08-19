@@ -31,7 +31,7 @@ const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
 
   return (
     <div className={`${styles.goalContainer} p-5 m-5`}>
-      {JSON.stringify(goals)}
+      {/* {JSON.stringify(goals)} */}
       { goals.map( (goal, index) =>
         <Row key={index}>
           <Col sm={6}>

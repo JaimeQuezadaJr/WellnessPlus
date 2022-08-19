@@ -15,8 +15,8 @@ module.exports = {
       });
   },
   findNutritionByUser: (req, res) => {
-    console.log('IS THIS WORKING', req.params.firstName);
-    User.findOne({ firstName: req.params.firstName }).then((user) => {
+    console.log('IS THIS WORKING', req.params.id);
+    User.findOne({ _id: req.params.id }).then((user) => {
       console.log('USERID', user._id);
       Nutrition.find({ createdBy: user._id })
         .populate('createdBy', 'firstName lastName age email') 
@@ -28,14 +28,14 @@ module.exports = {
           console.log('ERROR IN Get all nutrition by user', err);
           res.status(400).json({ message: 'something went wrong in find all nutrition by user', error: err });
         })
-        .catch((err) => {
-          console.log('ERROR IN Get all nutrition by user', err);
-          res.status(400).json({ message: 'something went wrong in find all nutrition by user', error: err });
-        });
+    })
+    .catch((err) => {
+      console.log('ERROR IN Get all nutrition by user', err);
+      res.status(400).json({ message: 'something went wrong in find all nutrition by user', error: err });
     });
   },
   findOneNutrition: (req, res) => {
-    Nutrition.findOne({ _id: req.params.id })
+    Nutrition.findOne({ _id: req.params.id }) 
       .then((nutrition) => {
         res.json(nutrition);
       })
@@ -46,7 +46,7 @@ module.exports = {
   },
   createNutrition: (req, res) => {
     const user = jwt.verify(req.cookies.userToken, SECRET);
-    Nutrition.create({ ...req.body, createdBy: user._id })
+    Nutrition.create({ ...req.body, createdBy: user._id }) 
       .then((newNutrition) => {
         res.status(201).json(newNutrition);
       })
