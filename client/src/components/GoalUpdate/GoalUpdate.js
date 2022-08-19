@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import GoalForm from '../GoalForm/GoalForm';
 
 
-const GoalUpdate = ({userId}) => {
+const GoalUpdate = ({setLoggedIn}) => {
 
   const {category, id} = useParams();
   const navigate = useNavigate();
@@ -16,19 +16,30 @@ const GoalUpdate = ({userId}) => {
   });
   const [error, setError] = useState({});
   const [loaded, setLoaded] = useState(false);
-  // const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/${category}/${id}`, { withCredentials: true }) //TODO confirm axios path and add authorization
-    .then( res => {
-      setGoal(res.data);
-      setLoaded(true);
-    })
-    .catch(err => console.log(err))
+    axios
+      .get('http://localhost:8000/api/current-user', { withCredentials: true })
+      .then((res) => {
+        setLoggedIn(true);
+
+        //get original data if logged in
+        axios.get(`http://localhost:8000/api/${category}/${id}`, { withCredentials: true })
+        .then( res => {
+          setGoal(res.data);
+          setLoaded(true);
+        })
+        .catch(err => console.log(err))
+      })
+      .catch((err) => {
+        navigate('/');
+        console.log(err)
+      });
+
   }, [category, id])
 
   const putSubmit = () => {
-    axios.put(`http://localhost:8000/api/${category}/${id}`, goal, { withCredentials: true }) //TODO confirm axios path and add authorization
+    axios.put(`http://localhost:8000/api/${category}/${id}`, goal, { withCredentials: true })
     .then(res => navigate('/dashboard'))
     .catch(err => {
       setError(err.response.data.errors);
@@ -39,7 +50,7 @@ const GoalUpdate = ({userId}) => {
   return (
     <>
     { loaded &&
-      <GoalForm action={"Update"} category={category} userId={userId} submitAction={putSubmit} goal={goal} setGoal={setGoal} error={error} />
+      <GoalForm action={"Update"} category={category} submitAction={putSubmit} goal={goal} setGoal={setGoal} error={error} />
     }
     </>
   )

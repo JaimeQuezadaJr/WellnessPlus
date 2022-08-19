@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import GoalList from "../GoalList/GoalList";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
-const GoalDashboard = (props) => {
+const GoalDashboard = ({setLoggedIn}) => {
+
+  const navigate = useNavigate();
 
   const [goals, setGoals] = useState([]);
   const [category, setCategory] = useState("nutrition");
@@ -18,6 +21,7 @@ const GoalDashboard = (props) => {
       .then((res) => {
         console.log(res.data)
         setUser(res.data.firstName);
+        setLoggedIn(true);
         
         //TODO get all three goals from backend
         axios.get(`http://localhost:8000/api/${category}/user/${res.data._id}`, { withCredentials: true})
@@ -32,7 +36,11 @@ const GoalDashboard = (props) => {
         .catch(err => console.log(err));
         
       })
-      .catch((err) => console.log(err)); 
+      .catch((err) => {
+        console.log(err)
+        navigate('/');
+      }
+      ); 
   }, [category]);
   
   return (
