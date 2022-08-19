@@ -34,7 +34,7 @@ const UserRegistration = ({ setLoggedIn }) => {
   };
   
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className='mt-5 mb-5'>
         <Container>
           <Form.Group className="mb-3 col-md-4" controlId="firstName">
               <Form.Label>First Name</Form.Label>

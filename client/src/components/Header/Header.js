@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button'
 
 import Nav from 'react-bootstrap/Nav';
+import './Header.module.css';
 
 const Header = ({loggedIn, setLoggedIn }) => {
   const navigate = useNavigate();
@@ -34,7 +35,8 @@ const Header = ({loggedIn, setLoggedIn }) => {
   };
 
   return (
-    <Navbar>
+    <>
+    <Navbar bg="primary" variant='dark'>
       <Container>
         <Navbar.Brand href="/">WellnessPlus</Navbar.Brand>
         <Navbar.Toggle />
@@ -43,7 +45,6 @@ const Header = ({loggedIn, setLoggedIn }) => {
               <Nav className=" justify-contend-end">
                 <Nav.Link href="/about">About</Nav.Link>
                 <Nav.Link href="/dashboard">Home</Nav.Link>
-                <Nav.Link href='/logout'>Logout</Nav.Link>
                 <Button variant="primary" onClick={onLogOut}>Logout</Button>
             </Nav>
           ) : (
@@ -57,6 +58,8 @@ const Header = ({loggedIn, setLoggedIn }) => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <div className='footer fixed-bottom' id='footer' style={{backgroundColor:'#0d6efd', height:20}}></div>
+    </>
     
   );
 }

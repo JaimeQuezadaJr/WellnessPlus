@@ -30,7 +30,7 @@ const UserLogin = ({ setLoggedIn }) => {
       .catch((err) => console.log(err));
   };
   return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="mt-5">
         <Container>
           <Form.Group className="mb-3 col-md-4" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
