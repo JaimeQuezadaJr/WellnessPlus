@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import '../UserLogin/UserLogin.module.css'
 import Card from 'react-bootstrap/Card';
 const UserLogin = ({ setLoggedIn }) => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({})
+  const [errors, setErrors] = useState({})
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -27,10 +29,11 @@ const UserLogin = ({ setLoggedIn }) => {
         setLoggedIn(true);
         navigate('/dashboard');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setErrors(err.response));
   };
   return (
-      <Form onSubmit={handleSubmit} className="mt-5">
+    <>
+      <Form onSubmit={handleSubmit} className="mt-3">
         <Container>
           <Form.Group className="mb-3 col-md-4" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
@@ -38,18 +41,19 @@ const UserLogin = ({ setLoggedIn }) => {
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
-            {/* {errors.email && <p className='validation'>- {errors.email.message}</p>} */}
           </Form.Group>
 
           <Form.Group className="mb-3 col-md-4" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange} required/>
           </Form.Group>
+          {errors.data && <p className='validation'>{errors.data.error}</p>}
           <Button variant="primary" type="submit">
             Login
           </Button>
         </Container>
       </Form>
+      </>
   );
 };
 
