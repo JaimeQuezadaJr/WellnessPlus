@@ -42,7 +42,7 @@ const login = async (req, res) => {
         console.log('JWT:', userToken);
         res
           .status(201)
-          .cookie('userToken', userToken, { expires: new Date(Date.now() + 900000) })
+          .cookie('userToken', userToken, { expires: new Date(Date.now() + 90000000000000) })
           .json({ successMessage: 'user loggedin', user: userDocument });
       }
     } catch (error) {
