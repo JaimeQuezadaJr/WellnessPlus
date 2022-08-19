@@ -38,7 +38,13 @@ const Header = ({loggedIn, setLoggedIn }) => {
     <>
     <Navbar bg="primary" variant='dark'>
       <Container>
-        <Navbar.Brand href="/">WellnessPlus</Navbar.Brand>
+        <Navbar.Brand href="/"><img
+              alt=""
+              src="/zoomed-logo.png"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}WellnessPlus</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           {user ? (
