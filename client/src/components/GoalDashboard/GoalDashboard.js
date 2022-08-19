@@ -4,17 +4,14 @@ import axios from "axios";
 import GoalList from "../GoalList/GoalList";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
-import { useParams } from "react-router-dom";
 
-const GoalDashboard = ({isLoggedin}) => {
 
-  // const [userId, setUserId] = useState(['62fc0cdbedbf1f1e0933cd8f']) //TODO change after test. props? token?
+const GoalDashboard = () => {
 
   const [goals, setGoals] = useState([]);
   const [category, setCategory] = useState("nutrition");
   const [complete, setComplete] = useState({});
   const [user, setUser] = useState({});
-  const {email} = useParams();
 
   useEffect(() => {
     axios
@@ -23,8 +20,8 @@ const GoalDashboard = ({isLoggedin}) => {
         console.log(res.data)
         setUser(res.data);
       })
-      .catch((err) => console.log(err)); 
-  }, [isLoggedin]);
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() =>{
     //TODO get all three goals from backend
@@ -38,12 +35,12 @@ const GoalDashboard = ({isLoggedin}) => {
         setComplete(tempComplete);
       })
       .catch(err => console.log(err));
-  },[category,user])
+  },[category, user])
   
   return (
     <div className="m-5">
       <div className="my-3">
-        <h2>Welcome {user.firstName} !</h2>
+        <h2>Welcome {user.firstName}!</h2>
       </div>
       <div className="mx-5 mt-5">
         <ButtonGroup>
