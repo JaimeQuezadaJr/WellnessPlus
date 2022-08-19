@@ -11,7 +11,7 @@ const UserRegistration = ({ setLoggedIn }) => {
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
-    age:0,
+    age: null,
     email: '',
     password: '',
     confirmPassword: '',
@@ -68,7 +68,7 @@ const UserRegistration = ({ setLoggedIn }) => {
           </Form.Group>
           <Form.Group className="mb-3 col-md-4" controlId="formBasicConfirmPassword">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" name='confirmPassword' placeholder="confirmPassword" value={user.confirmPassword} onChange={handleChange} />
+            <Form.Control type="password" name='confirmPassword' placeholder="Must Match Password" value={user.confirmPassword} onChange={handleChange} />
             {errors.confirmPassword && <p className='validation'>{errors.confirmPassword.message}</p>}
           </Form.Group>
           <Button variant="primary" type="submit">
