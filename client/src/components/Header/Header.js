@@ -29,6 +29,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
     .then((res) => {
         console.log(res.data);
         setUser(null);
+        setLoggedIn(false);
         navigate('/')
     })
     .catch((err) => console.log(err));

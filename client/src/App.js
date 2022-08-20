@@ -21,7 +21,7 @@ function App() {
       <BrowserRouter>
         <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Routes>
-          <Route path={'/'} element={<HomePage setLoggedIn={setLoggedIn} />} />
+          <Route path={'/'} element={<HomePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
           <Route path={'/login'} element={<UserLogin setLoggedIn={setLoggedIn} />} />
           <Route path={'/register'} element={<UserRegistration setLoggedIn={setLoggedIn} />}/>
           <Route path={'/about'} element={<About setLoggedIn={setLoggedIn} />} />

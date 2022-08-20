@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 
-const HomePage = ({setLoggedIn}) => {
+const HomePage = ({loggedIn, setLoggedIn}) => {
 
   const navigate = useNavigate();
   const [btnLink, setBtnLink] = useState([]);
@@ -19,11 +19,12 @@ const HomePage = ({setLoggedIn}) => {
       setBtnLink(['/dashboard', 'Start Tracking']);
     })
     .catch((err) => {
+      setLoggedIn(false);
       setBtnLink(['/login', 'Get Started']);
       console.log(err)
     });
 
-  },[])
+  },[loggedIn])
 
   return (
     <Container className='mt-5 mb-5'>
