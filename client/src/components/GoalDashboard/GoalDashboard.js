@@ -5,13 +5,16 @@ import axios from "axios";
 import GoalList from "../GoalList/GoalList";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Container from 'react-bootstrap/Container';
 
 const GoalDashboard = ({setLoggedIn}) => {
 
   const navigate = useNavigate();
 
   const [goals, setGoals] = useState([]);
-  const [category, setCategory] = useState("nutrition");
+  const [category, setCategory] = useState("Nutrition");
   const [complete, setComplete] = useState({});
   const [user, setUser] = useState("");
 
@@ -44,19 +47,19 @@ const GoalDashboard = ({setLoggedIn}) => {
   }, [category]);
   
   return (
-    <div className="m-5">
+    <>
+    <Container>
       <div className="my-3">
-        <h2>Welcome {user} !</h2>
+        <h3>Welcome {user} !</h3>
       </div>
-      <div className="mx-5 mt-5">
-        <ButtonGroup>
-          <Button onClick={ (e) => setCategory(e.target.value) } value={'nutrition'}>Nutrition</Button>
-          <Button onClick={ (e) => setCategory(e.target.value) } value={'fitness'}>Fitness</Button>
-          <Button onClick={ (e) => setCategory(e.target.value) } value={'mindfulness'}>Mindfulness</Button>
+        <ButtonGroup className="">
+          <Button variant="success" onClick={ (e) => setCategory(e.target.value) } value={'Nutrition'}>Nutrition</Button>
+          <Button onClick={ (e) => setCategory(e.target.value) } value={'Fitness'}>Fitness</Button>
+          <Button variant="light" onClick={ (e) => setCategory(e.target.value) } value={'Mindfulness'}>Mindfulness</Button>
         </ButtonGroup>
-      </div>
       <GoalList setGoals={setGoals} goals={goals} category={category} complete={complete} setComplete={setComplete}/>
-    </div>
+    </Container>
+    </>
   )
 }
 export default GoalDashboard;

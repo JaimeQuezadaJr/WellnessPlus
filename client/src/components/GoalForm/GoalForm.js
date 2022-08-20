@@ -1,5 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container';
 
 const GoalForm = (props) => {
 
@@ -22,9 +23,10 @@ const GoalForm = (props) => {
   }
 
   return (
-    <div className='d-flex flex-column'>
-      <h3>{action} {category.toUpperCase()} Goal</h3>
-      <Form onSubmit={ onSubmitHandler }>
+    <>
+    <Container className="mt-3 mb-3 col-md-5">
+      <h3>{action} {category} Goal</h3>
+      <Form onSubmit={ onSubmitHandler } >
         <Form.Group controlId='description'>
           <Form.Label>Description</Form.Label>
           <Form.Control type='textarea' row={3} name='description' onChange={onChangeHandler} value={goal.description}/>
@@ -39,11 +41,12 @@ const GoalForm = (props) => {
             <Form.Text className='text-danger'>{error.completedBy.message}</Form.Text>
           }
         </Form.Group>
-        <div className='d-grid d-md-block'>
-          <Button variant="outline-dark" type="submit" className='col-md-5'>Update</Button>
-        </div>
+        
+          <Button variant="outline-dark" type="submit" className='mt-3'>Add</Button>
+        
       </Form>
-    </div>
+    </Container>
+    </>
   )
 }
 export default GoalForm;
