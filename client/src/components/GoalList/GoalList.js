@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from "./GoalList.module.css";
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 
 const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
 
@@ -30,8 +32,7 @@ const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
   }
 
   return (
-    <div className={`${styles.goalContainer} p-5 m-5`}>
-      {/* {JSON.stringify(goals)} */}
+    <div className='p-5 m-5'>
       { goals.map( (goal, index) =>
         <Row key={index}>
           <Col sm={6}>
@@ -46,7 +47,7 @@ const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
               <Col>
                 <Row>
                   <Col as={'dt'} className={styles.goalDates}>Complete by</Col>
-                  <Col as={'dd'} className={styles.goalDates}>{dateParse(goal.completedBy)}</Col>
+                  <Col as={'dd'} className={styles.goalDates}>{dateParse(goal.completedBy)}</Col> 
                 </Row>
               </Col>
             </Row>
@@ -68,3 +69,41 @@ const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
   )
 }
 export default GoalList;
+
+{/* <Card>
+    <Card.Body>
+      <Card.Title>Nutrition Goal #1</Card.Title>
+      <Card.Text>
+      {goal.description}
+      </Card.Text>
+      <p className='m-0'>Made On: 10/20/2022</p>
+      <p>Complete By: 10/30/2022</p>
+      <Button variant="primary">Complete</Button>
+      <Button variant="primary">Delete</Button>
+      <Button variant="primary">Update</Button>
+    </Card.Body>
+    <Card.Body>
+      <Card.Title>Nutrition Goal #2</Card.Title>
+      <Card.Text>
+        Some quick example text to build on the card title and make up the
+        bulk of the card's content.
+      </Card.Text>
+      <p className='m-0'>Made On: 10/20/2022</p>
+      <p>Complete By: 10/30/2022</p>
+      <Button variant="primary">Complete</Button>
+      <Button variant="primary">Delete</Button>
+      <Button variant="primary">Update</Button>
+    </Card.Body>
+    <Card.Body>
+      <Card.Title>Nutrition Goal #3</Card.Title>
+      <Card.Text>
+        Some quick example text to build on the card title and make up the
+        bulk of the card's content.
+      </Card.Text>
+      <p className='m-0'>Made On: 10/20/2022</p>
+      <p>Complete By: 10/30/2022</p>
+      <Button variant="primary">Complete</Button>
+      <Button variant="primary">Delete</Button>
+      <Button variant="primary">Update</Button>
+    </Card.Body>
+  </Card> */}
