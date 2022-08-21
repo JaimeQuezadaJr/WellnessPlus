@@ -36,7 +36,7 @@ const GoalUpdate = ({setLoggedIn}) => {
         console.log(err)
       });
 
-  }, [category, id])
+  }, [category, id]) 
 
   const putSubmit = () => {
     axios.put(`http://localhost:8000/api/${category}/${id}`, goal, { withCredentials: true })

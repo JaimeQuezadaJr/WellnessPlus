@@ -32,78 +32,65 @@ const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
   }
 
   return (
-    <div className='p-5 m-5'>
-      { goals.map( (goal, index) =>
-        <Row key={index}>
-          <Col sm={6}>
-            <p className={complete[goal._id]? styles.goalComplete: styles.goalNotComplete} id={'goal-description'}>{goal.description}</p>
-            <Row as={'dl'} className={'g-5'}>
-              <Col>
-                <Row>
-                  <Col as={'dt'} className={styles.goalDates}>Made on</Col>
-                  <Col as={'dd'} className={styles.goalDates}>{dateParse(goal.updatedAt)}</Col>
-                </Row>
-              </Col>
-              <Col>
-                <Row>
-                  <Col as={'dt'} className={styles.goalDates}>Complete by</Col>
-                  <Col as={'dd'} className={styles.goalDates}>{dateParse(goal.completedBy)}</Col> 
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-          <Col sm={6}>
-              { complete[goal._id]
-                ? <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'secondary'} className={'me-3'}>Completed</Button>
-                : <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'primary'} className={'me-3'}>Complete</Button>
-              }
-              <Button onClick={ (e) => onDeleteHandler(e, goal._id) } className={'me-3'}>Delete</Button>
-              <Button onClick={() => navigate(`/goal/edit/${category}/${goal._id}`)}>Edit</Button>
-          </Col>
-        </Row>
-      )}
+    <>
+    {goals.map((goal, index) => 
+      <Card key={index}>
+          <Card.Body>
+            <Card.Title>{category} Goal</Card.Title>
+            <Card.Text className={complete[goal._id]? styles.goalComplete: styles.goalNotComplete}>
+            {goal.description}
+            </Card.Text>
+            <p className='m-0'>Made On: {dateParse(goal.updatedAt)}</p>
+            <p>Complete By: {dateParse(goal.completedBy)}</p>
+            { complete[goal._id]
+                      ? <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'secondary'} className={'me-3'}>Completed</Button>
+                      : <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'primary'} className={'me-3'}>Complete</Button>
+                    }
+            <Button onClick={ (e) => onDeleteHandler(e, goal._id) } variant="primary" className={'me-3'}>Delete</Button>
+            <Button onClick={() => navigate(`/goal/edit/${category}/${goal._id}`)} variant="primary">Update</Button>
+          </Card.Body>
+        </Card> )} 
       <Col md={6} className="my-5 d-grid mx-md-3 mx-auto">
         <Button onClick={() => navigate(`/goal/add/${category}`)}>Add {category} Goal</Button>
       </Col>
-    </div>
+   </>
   )
 }
 export default GoalList;
 
-{/* <Card>
-    <Card.Body>
-      <Card.Title>Nutrition Goal #1</Card.Title>
-      <Card.Text>
-      {goal.description}
-      </Card.Text>
-      <p className='m-0'>Made On: 10/20/2022</p>
-      <p>Complete By: 10/30/2022</p>
-      <Button variant="primary">Complete</Button>
-      <Button variant="primary">Delete</Button>
-      <Button variant="primary">Update</Button>
-    </Card.Body>
-    <Card.Body>
-      <Card.Title>Nutrition Goal #2</Card.Title>
-      <Card.Text>
-        Some quick example text to build on the card title and make up the
-        bulk of the card's content.
-      </Card.Text>
-      <p className='m-0'>Made On: 10/20/2022</p>
-      <p>Complete By: 10/30/2022</p>
-      <Button variant="primary">Complete</Button>
-      <Button variant="primary">Delete</Button>
-      <Button variant="primary">Update</Button>
-    </Card.Body>
-    <Card.Body>
-      <Card.Title>Nutrition Goal #3</Card.Title>
-      <Card.Text>
-        Some quick example text to build on the card title and make up the
-        bulk of the card's content.
-      </Card.Text>
-      <p className='m-0'>Made On: 10/20/2022</p>
-      <p>Complete By: 10/30/2022</p>
-      <Button variant="primary">Complete</Button>
-      <Button variant="primary">Delete</Button>
-      <Button variant="primary">Update</Button>
-    </Card.Body>
-  </Card> */}
+
+
+  // <div className='p-5 m-5'>
+  //     { goals.map( (goal, index) =>
+  //       <Row key={index}>
+  //         <Col sm={6}>
+  //           <p className={complete[goal._id]? styles.goalComplete: styles.goalNotComplete} id={'goal-description'}>{goal.description}</p>
+  //           <Row as={'dl'} className={'g-5'}>
+  //             <Col>
+  //               <Row>
+  //                 <Col as={'dt'} className={styles.goalDates}>Made on</Col>
+  //                 <Col as={'dd'} className={styles.goalDates}>{dateParse(goal.updatedAt)}</Col>
+  //               </Row>
+  //             </Col>
+  //             <Col>
+  //               <Row>
+  //                 <Col as={'dt'} className={styles.goalDates}>Complete by</Col>
+  //                 <Col as={'dd'} className={styles.goalDates}>{dateParse(goal.completedBy)}</Col> 
+  //               </Row>
+  //             </Col>
+  //           </Row>
+  //         </Col>
+  //         <Col sm={6}>
+  //             { complete[goal._id]
+  //               ? <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'secondary'} className={'me-3'}>Completed</Button>
+  //               : <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'primary'} className={'me-3'}>Complete</Button>
+  //             }
+  //             <Button onClick={ (e) => onDeleteHandler(e, goal._id) } className={'me-3'}>Delete</Button>
+  //             <Button onClick={() => navigate(`/goal/edit/${category}/${goal._id}`)}>Edit</Button>
+  //         </Col>
+  //       </Row>
+  //     )}
+  //     <Col md={6} className="my-5 d-grid mx-md-3 mx-auto">
+  //       <Button onClick={() => navigate(`/goal/add/${category}`)}>Add {category} Goal</Button>
+  //     </Col>
+  //   </div>
