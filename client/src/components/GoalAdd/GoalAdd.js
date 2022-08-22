@@ -7,7 +7,7 @@ import GoalForm from '../GoalForm/GoalForm';
 
 const GoalAdd = ({setLoggedIn}) => {
 
-  const {category} = useParams();
+  const {category} = useParams(); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const GoalAdd = ({setLoggedIn}) => {
   }
 
   return (
-    <GoalForm action={"Add"} category={category} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error}/>
+    <GoalForm action={"Add"} category={category} submitAction={postSubmit} goal={goal} setGoal={setGoal} error={error} formButton={"Add"}/>
   )
 }
 export default GoalAdd

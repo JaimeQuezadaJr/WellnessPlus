@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import styles from "./GoalList.module.css";
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 
 const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
 
@@ -36,22 +37,22 @@ const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
     {goals.map((goal, index) => 
       <Card key={index}>
           <Card.Body>
-            <Card.Title>{category} Goal</Card.Title>
+            {/* <Card.Title>{category} Goal</Card.Title> */}
             <Card.Text className={complete[goal._id]? styles.goalComplete: styles.goalNotComplete}>
             {goal.description}
             </Card.Text>
-            <p className='m-0'>Made On: {dateParse(goal.updatedAt)}</p>
-            <p>Complete By: {dateParse(goal.completedBy)}</p>
+            <Form.Text className='m-0'>Made On: {dateParse(goal.updatedAt)}</Form.Text><br></br>
+            <Form.Text className='my-2'>Complete By: {dateParse(goal.completedBy)}</Form.Text><br></br>
             { complete[goal._id]
-                      ? <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'secondary'} className={'me-3'}>Completed</Button>
-                      : <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'primary'} className={'me-3'}>Complete</Button>
+                      ? <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'secondary'} className='mt-1' size='sm'>Completed</Button>
+                      : <Button onClick={ (e) => onCompleteHandler(e, goal._id) } variant={'success'} className='mt-1' size='sm'>Complete</Button>
                     }
-            <Button onClick={ (e) => onDeleteHandler(e, goal._id) } variant="primary" className={'me-3'}>Delete</Button>
-            <Button onClick={() => navigate(`/goal/edit/${category}/${goal._id}`)} variant="primary">Update</Button>
+            <Button onClick={ (e) => onDeleteHandler(e, goal._id) } variant="danger" size='sm' className='mx-1 mt-1'>Delete</Button>
+            <Button onClick={() => navigate(`/goal/edit/${category}/${goal._id}`)} variant="primary" size='sm' className='mt-1'>Update</Button>
           </Card.Body>
         </Card> )} 
       <Col md={6} className="my-5 d-grid mx-md-3 mx-auto">
-        <Button onClick={() => navigate(`/goal/add/${category}`)}>Add {category} Goal</Button>
+        <Button onClick={() => navigate(`/goal/add/${category}`)}>Add {category} Goal</Button> 
       </Col>
    </>
   )
