@@ -37,7 +37,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
 
   return (
     <>
-    <Navbar bg="primary" variant='dark'>
+    <Navbar bg="primary" variant='dark' expand='sm'>
       <Container>
         <Navbar.Brand as={Link} to="/"><img
               alt=""
@@ -52,7 +52,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
               <Nav className=" justify-contend-end">
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
                 <Nav.Link as={Link} to="/dashboard">Home</Nav.Link>
-                <Button variant="primary" onClick={onLogOut}>Logout</Button>
+                <Nav.Link onClick={onLogOut}>Logout</Nav.Link>
             </Nav>
           ) : (
               <Nav className=" justify-contend-end">
