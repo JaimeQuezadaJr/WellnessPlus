@@ -15,7 +15,7 @@ const GoalUpdate = ({setLoggedIn}) => {
     "completedBy": "",
   });
   const [error, setError] = useState({});
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false); 
 
   useEffect(() => {
     axios
@@ -50,7 +50,7 @@ const GoalUpdate = ({setLoggedIn}) => {
   return (
     <>
     { loaded &&
-      <GoalForm action={"Update"} category={category} submitAction={putSubmit} goal={goal} setGoal={setGoal} error={error} />
+      <GoalForm action={"Update"} category={category} submitAction={putSubmit} goal={goal} setGoal={setGoal} error={error} formButton={"Update"}/>
     }
     </>
   )

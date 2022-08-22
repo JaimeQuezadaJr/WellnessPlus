@@ -2,9 +2,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container';
 
-const GoalForm = (props) => {
+const GoalForm = (props) => { 
 
-  const {action, category, submitAction, goal, setGoal, error} = props;
+  const {action, category, submitAction, goal, setGoal, error, formButton} = props;
 
   const datePickerParse = (date) => {
     let dateObj = new Date(date);
@@ -42,7 +42,7 @@ const GoalForm = (props) => {
           }
         </Form.Group>
         
-          <Button variant="outline-dark" type="submit" className='mt-3'>Add</Button>
+          <Button variant="outline-dark" type="submit" className='mt-3'>{formButton}</Button>
         
       </Form>
     </Container>
