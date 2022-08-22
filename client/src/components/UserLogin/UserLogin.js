@@ -46,8 +46,8 @@ const UserLogin = ({ setLoggedIn }) => {
           <Form.Group className="mb-3 col-md-4" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange} required/>
+            {errors.data && <Form.Text className='text-danger'>{errors.data.error}</Form.Text>}
           </Form.Group>
-          {errors.data && <p className='validation'>{errors.data.error}</p>}
           <Button variant="primary" type="submit">
             Login
           </Button>
