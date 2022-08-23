@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
@@ -39,8 +39,12 @@ const HomePage = ({loggedIn, setLoggedIn}) => {
           <Button variant="primary" onClick={() => navigate(btnLink[0])}>{btnLink[1]}</Button>
         </Card.Body>
       </Card>
-    </Container>
+    </Container> 
   )
 }
 
 export default HomePage;
+
+
+
+
