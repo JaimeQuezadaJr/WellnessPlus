@@ -26,7 +26,7 @@ const About = ({setLoggedIn}) => {
   },[])
 
   return (
-    <Container className='mt-5 mb-5'>
+    <Container className='form mb-5'>
     <Card className='col-lg-6'>
       <Card.Header as="h5">Become more in tune with yourself!</Card.Header>
       <Card.Body>
