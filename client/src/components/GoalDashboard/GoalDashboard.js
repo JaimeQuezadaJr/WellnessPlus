@@ -48,7 +48,7 @@ const GoalDashboard = ({setLoggedIn}) => {
   
   return (
     <>
-    <Container>
+    <Container className="dashboard">
       <div className="my-3">
         <h3>Welcome {user} !</h3>
       </div>
