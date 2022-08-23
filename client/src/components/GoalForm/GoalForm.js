@@ -24,7 +24,7 @@ const GoalForm = (props) => {
 
   return ( 
     <>
-    <Container className="mt-3 mb-3 col-md-5">
+    <Container className="form mb-3 col-md-5">
       <h3>{action} {category} Goal</h3>
       <Form onSubmit={ onSubmitHandler } >
         <Form.Group controlId='description'>

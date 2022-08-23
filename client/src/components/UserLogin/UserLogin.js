@@ -33,7 +33,7 @@ const UserLogin = ({ setLoggedIn }) => {
   };
   return (
     <>
-      <Form onSubmit={handleSubmit} className="mt-3"> 
+      <Form onSubmit={handleSubmit} className="form"> 
         <Container>
           <Form.Group className="mb-3 col-md-4" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
