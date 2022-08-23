@@ -51,7 +51,7 @@ const GoalList = ({setGoals, goals, category, complete, setComplete}) => {
             <Button onClick={() => navigate(`/goal/edit/${category}/${goal._id}`)} variant="primary" size='sm' className='mt-1'>Update</Button>
           </Card.Body>
         </Card> )} 
-      <Col md={6} className="my-5 d-grid mx-md-3 mx-auto">
+      <Col md={6} className="mt-3 d-grid mx-md-0 mx-auto">
         <Button onClick={() => navigate(`/goal/add/${category}`)}>Add {category} Goal</Button> 
       </Col>
    </>

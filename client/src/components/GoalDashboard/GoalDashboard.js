@@ -58,6 +58,39 @@ const GoalDashboard = ({setLoggedIn}) => {
           <Button variant="light" onClick={ (e) => setCategory(e.target.value) } value={'Mindfulness'}>Mindfulness</Button>
         </ButtonGroup>
       <GoalList setGoals={setGoals} goals={goals} category={category} complete={complete} setComplete={setComplete}/>
+      {category === "Nutrition" ?
+      <Card className="my-5 col-lg-6">
+      <Card.Img variant="top" src="/breakfast-image.webp" />
+      <Card.Body>
+        <Card.Title>Nutritious Recipes</Card.Title>
+        <Card.Text>
+          Explore new delicious recipes from the USDA!
+        </Card.Text>
+        <Button variant="primary" onClick={() => navigate('//www.nutrition.gov/recipes')}>View</Button>
+      </Card.Body>
+    </Card> :category ==="Fitness"?
+    <Card className="my-5 col-lg-6">
+    <Card.Img variant="top" src="https://cdn.wallpapersafari.com/1/59/PTymOS.jpg" />
+    <Card.Body>
+      <Card.Title>Workout Routines</Card.Title>
+      <Card.Text>
+        Explore workout routines!
+      </Card.Text>
+      <Button variant="primary" onClick={() => navigate('//www.muscleandstrength.com/workout-routines')}>View</Button>
+    </Card.Body>
+    </Card>
+    :category ==="Mindfulness" ?
+    <Card className="my-5 col-lg-6">
+    <Card.Img variant="top" src="https://wallpaperaccess.com/full/3445589.jpg" />
+    <Card.Body>
+      <Card.Title>Mindfulness Routines</Card.Title>
+      <Card.Text>
+        Explore new meditation techniques from UCLA Health!
+      </Card.Text>
+      <Button variant="primary" onClick={() => navigate('//www.uclahealth.org/marc/mindful-meditations')}>View</Button>
+    </Card.Body>
+    </Card>: null 
+  }
     </Container>
     </>
   )
