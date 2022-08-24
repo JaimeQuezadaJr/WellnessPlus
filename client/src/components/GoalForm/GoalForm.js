@@ -29,7 +29,7 @@ const GoalForm = (props) => {
       <Form onSubmit={ onSubmitHandler } >
         <Form.Group controlId='description'>
           <Form.Label>Description</Form.Label>
-          <Form.Control type='textarea' row={3} name='description' onChange={onChangeHandler} value={goal.description}/>
+          <Form.Control type='textarea' row={3} name='description' onChange={onChangeHandler} value={goal.description} required/>
           {error.description && 
             <Form.Text className='text-danger'>{error.description.message}</Form.Text>
           }
