@@ -26,7 +26,11 @@ const GoalAdd = ({setLoggedIn}) => {
   const defaultCompletedBy = () => {
     let today = new Date();
     let tomorrow = new Date();
-    return tomorrow.setDate(today.getDate() + 1);
+    tomorrow.setDate(today.getDate() + 1);
+    let day = `0${tomorrow.getDate()}`.slice(-2);
+    // console.log(tomorrow.getDate())
+    let month = `0${tomorrow.getMonth() + 1}`.slice(-2);
+    return `${tomorrow.getFullYear()}-${month}-${day}`;
   }
 
   const [goal, setGoal] = useState({ 
