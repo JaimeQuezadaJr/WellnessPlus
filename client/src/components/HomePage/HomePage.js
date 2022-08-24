@@ -12,6 +12,7 @@ const HomePage = ({loggedIn, setLoggedIn}) => {
 
   const navigate = useNavigate();
   const [btnLink, setBtnLink] = useState([]);
+  const [quote, setQuote] = useState([]);
   
   useEffect(() => {
     axios
@@ -25,8 +26,14 @@ const HomePage = ({loggedIn, setLoggedIn}) => {
       setBtnLink(['/login', 'Get Started']);
       console.log(err)
     });
-
   },[loggedIn])
+
+  useEffect(() => {
+    fetch('https://quotes.rest/qod', {withCredentials:true})
+    .then((res) => res.json())
+    .then((result) => setQuote(result.contents.quotes[0]))
+    .catch((err) => console.log(err))
+  },[])
 
   return (
     <Container className='mt-5 mb-5'>
@@ -40,11 +47,21 @@ const HomePage = ({loggedIn, setLoggedIn}) => {
           <Button variant="primary" onClick={() => navigate(btnLink[0])}>{btnLink[1]}</Button>
         </Card.Body>
       </Card>
+      <Card className='col-lg-6 big-card'>
+        <Card.Img variant="top" src= {quote.background} />
+        <Card.Body>
+          <Card.Title>{quote.title}</Card.Title>
+          <Card.Text className='text-muted quote'>
+           " {quote.quote} "<br></br><span>- {quote.author}</span>
+          </Card.Text>
+        </Card.Body>
+      </Card>
     </Container> 
   )
 }
 
 export default HomePage;
+
 
 
 
