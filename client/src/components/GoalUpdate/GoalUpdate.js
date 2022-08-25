@@ -17,6 +17,20 @@ const GoalUpdate = ({setLoggedIn}) => {
   const [error, setError] = useState({});
   const [loaded, setLoaded] = useState(false); 
 
+  const datePickerParse = (date) => {
+    let dateObj = new Date(date);
+    let today = new Date();
+    if(today > dateObj){
+      let tomorrow = new Date();
+      dateObj = new Date(tomorrow.setDate(today.getDate() + 1));
+    }
+    console.log("date = ", date)
+    let day = `0${dateObj.getDate()}`.slice(-2);
+    console.log(dateObj.getDate())
+    let month = `0${dateObj.getMonth() + 1}`.slice(-2);
+    return `${dateObj.getFullYear()}-${month}-${day}`;
+  }
+
   useEffect(() => {
     axios
       .get('http://localhost:8000/api/current-user', { withCredentials: true })
@@ -26,7 +40,7 @@ const GoalUpdate = ({setLoggedIn}) => {
         //get original data if logged in
         axios.get(`http://localhost:8000/api/${category}/${id}`, { withCredentials: true })
         .then( res => {
-          setGoal(res.data);
+          setGoal({...res.data, completedBy: datePickerParse(res.data.completedBy)});
           setLoaded(true);
         })
         .catch(err => console.log(err))

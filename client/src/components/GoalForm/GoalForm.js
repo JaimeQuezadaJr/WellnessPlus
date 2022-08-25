@@ -6,14 +6,10 @@ const GoalForm = (props) => {
 
   const {action, category, submitAction, goal, setGoal, error, formButton} = props;
 
-  const datePickerParse = (date) => {
-    let dateObj = new Date(date);
-    let day = `0${dateObj.getDate()}`.slice(-2);
-    let month = `0${dateObj.getMonth() + 1}`.slice(-2);
-    return `${dateObj.getFullYear()}-${month}-${day}`;
-  }
+
 
   const onChangeHandler = (e) => {
+    console.log(e.target.name, ' = ', e.target.value);
     setGoal({...goal, [e.target.name]: e.target.value }); 
   }
 
@@ -36,7 +32,7 @@ const GoalForm = (props) => {
         </Form.Group>
         <Form.Group controlId='completedBy'>
           <Form.Label>Completed By</Form.Label>
-          <Form.Control type='date' name='completedBy' onChange={onChangeHandler} value={datePickerParse(goal.completedBy)}/>
+          <Form.Control type='date' name='completedBy' onChange={onChangeHandler} value={goal.completedBy}/>
           {error.completedBy && 
             <Form.Text className='text-danger'>{error.completedBy.message}</Form.Text>
           }
