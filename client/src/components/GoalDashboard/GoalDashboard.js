@@ -22,14 +22,14 @@ const GoalDashboard = ({setLoggedIn}) => {
     axios
       .get('http://localhost:8000/api/current-user', { withCredentials: true })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setUser(res.data.firstName);
         setLoggedIn(true);
         
         //TODO get all three goals from backend
         axios.get(`http://localhost:8000/api/${category}/user/${res.data._id}`, { withCredentials: true})
         .then(res => {
-          console.log(res.data)
+          // console.log(res.data)
           setGoals(res.data)
 
           let tempComplete = {};

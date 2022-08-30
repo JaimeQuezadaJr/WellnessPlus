@@ -25,7 +25,7 @@ const UserLogin = ({ setLoggedIn }) => {
     axios
       .post('http://localhost:8000/login', user, { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setLoggedIn(true);
         navigate('/dashboard');
       })

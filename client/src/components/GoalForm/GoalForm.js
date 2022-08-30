@@ -9,7 +9,7 @@ const GoalForm = (props) => {
 
 
   const onChangeHandler = (e) => {
-    console.log(e.target.name, ' = ', e.target.value);
+    // console.log(e.target.name, ' = ', e.target.value);
     setGoal({...goal, [e.target.name]: e.target.value }); 
   }
 

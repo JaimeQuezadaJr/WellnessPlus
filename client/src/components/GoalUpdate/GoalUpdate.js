@@ -24,9 +24,9 @@ const GoalUpdate = ({setLoggedIn}) => {
       let tomorrow = new Date();
       dateObj = new Date(tomorrow.setDate(today.getDate() + 1));
     }
-    console.log("date = ", date)
+    // console.log("date = ", date)
     let day = `0${dateObj.getDate()}`.slice(-2);
-    console.log(dateObj.getDate())
+    // console.log(dateObj.getDate())
     let month = `0${dateObj.getMonth() + 1}`.slice(-2);
     return `${dateObj.getFullYear()}-${month}-${day}`;
   }

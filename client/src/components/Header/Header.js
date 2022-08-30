@@ -27,7 +27,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
     axios
     .post('http://localhost:8000/logout',{}, { withCredentials: true })
     .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setUser(null);
         setLoggedIn(false);
         navigate('/')
